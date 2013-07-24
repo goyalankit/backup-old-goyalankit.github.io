@@ -3,7 +3,7 @@ layout: post
 title: "modularize_sinatra - modular sinatra app generator"
 date: 2013-07-23 21:41
 comments: true
-categories: sinatra ruby gem
+categories: sinatra ruby gem labs
 ---
 
 [**Sinatra**](http://github.com/sinatra/sinatra) is simple, small and fast. 
@@ -12,7 +12,7 @@ categories: sinatra ruby gem
 
 The only downside is that it doesn't offer you the typical ["MVC"](http://en.wikipedia.org/wiki/Model–view–controller) like [**Rails**](http://github.com/rails/rails). 
 
-Lot of times Rails is an overkill for a simple application and Sinatra seems like a perfect choice. Since using Sinatra, you could write all your code in a single file, and at one time it becomse really hard to manage the code and you may feel the need of porting it to a framework like Rails. However, you don't need all the features that comes with Rails. What you need here is some kind of modularization in your application. For this very purpose I created a gem called [modularize_sinatra](http://github.com/goyalankit/modularize_sinatra)
+Lot of times Rails is an overkill for a simple application and Sinatra seems like a perfect choice. Since using Sinatra, you could write all your code in a single file, and at one time it becomes really hard to manage the code and you may feel the need of porting it to a framework like Rails. However, you don't need all the features that comes with Rails. What you need here is some kind of modularization in your application. For this very purpose I created a gem called [modularize_sinatra](http://github.com/goyalankit/modularize_sinatra)
 
 > **modularize_sinatra** creates a *Rails like* MVC structure without the overhead. 
 
