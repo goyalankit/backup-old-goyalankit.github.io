@@ -5,3 +5,7 @@
 @import "base";
 @import "parts";
 @import "plugins";
+
+article code{
+  font-family: monospace !important;
+}
