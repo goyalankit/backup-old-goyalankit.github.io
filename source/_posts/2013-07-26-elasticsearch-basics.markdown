@@ -16,10 +16,10 @@ Analyzers basically helps you in analyzing your data.`:o` You need to analyze da
 
 Creating indexes mainly involves three steps: 
 
-* **Pre-processing of raw text** using [char filters ]( http://www.elasticsearch.org/guide/reference/index-modules/analysis/mapping-charfilter/). This may be used to strip html tags, or you may define your custom mapping.
-*Couldn't find a way to test this using analyse api. Please put it in
-comments if you know some way to test these through Analyze Api*
-Example: You could use a char-filter of type [html_strip](http://www.elasticsearch.org/guide/reference/index-modules/analysis/htmlstrip-charfilter/) to strip out html tags.
+* **Pre-processing of raw text** using [char filters ]( http://www.elasticsearch.org/guide/reference/index-modules/analysis/mapping-charfilter/). This may be used to strip html tags, or you may define your custom mapping.  (*Couldn't find a way to test this using analyse api. Please put it in comments if you know some way to test these through Analyze Api*) 
+
+
+Example: You could use a **char-filter** of type [`html_strip`](http://www.elasticsearch.org/guide/reference/index-modules/analysis/htmlstrip-charfilter/) to strip out html tags.  
 
 A text like this:
 
@@ -36,6 +36,9 @@ Learn Something New Today! which is always fun
 <!-- more -->
 
 * **Tokenization of the pre-processed text** using tokenizers. Tokenizers breaks the pre-processed text into tokens. There are different kind of tokenizers available and each of them breaks the text into words differently. By default elasticsearch uses [standard tokenizer](http://www.elasticsearch.org/guide/reference/index-modules/analysis/standard-tokenizer/). 
+
+
+standard tokenizer normalizes the data. Note that it removes `!` from `Today!`
 
 A pre-processed text like this:
 
