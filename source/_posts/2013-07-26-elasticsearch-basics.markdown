@@ -3,7 +3,7 @@ layout: post
 title: "elasticsearch basics - Analyzers"
 date: 2013-07-24 14:18
 comments: true
-published: false
+published: true
 categories: elasticsearch tutorials analyzers
 ---
 
