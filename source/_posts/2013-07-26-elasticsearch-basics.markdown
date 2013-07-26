@@ -10,7 +10,7 @@ categories: elasticsearch tutorials analyzers
 Elasticsearch is a powerful open source search engine build over Apache
 Lucene. You can do all kind of customized searches on huge amount of
 data by creating customized indexes. This post gives an overview of
-Analyses module of elasticsearch.
+Analysis module of elasticsearch.
 
 Analyzers basically helps you in analyzing your data.`:o` You need to analyze data while creating indexes and while searching. You could analyze your analyzers using [Analyze Api](http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze.html) provided by elasticsearch.
 
