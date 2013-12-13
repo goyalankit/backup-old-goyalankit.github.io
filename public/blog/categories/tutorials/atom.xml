@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tutorials | Ankit Goyal]]></title>
+  <link href="http://goyalankit.github.io/blog/categories/tutorials/atom.xml" rel="self"/>
+  <link href="http://goyalankit.github.io/"/>
+  <updated>2013-12-12T22:11:55-06:00</updated>
+  <id>http://goyalankit.github.io/</id>
+  <author>
+    <name><![CDATA[Ankit Goyal]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[elasticsearch basics - Analyzers]]></title>
+    <link href="http://goyalankit.github.io/blog/2013/07/24/elasticsearch-basics/"/>
+    <updated>2013-07-24T14:18:00-05:00</updated>
+    <id>http://goyalankit.github.io/blog/2013/07/24/elasticsearch-basics</id>
+    <content type="html"><![CDATA[<p>Elasticsearch is a powerful open source search engine build over Apache
+Lucene. You can do all kind of customized searches on huge amount of
+data by creating customized indexes. This post gives an overview of
+Analysis module of elasticsearch.</p>
+
+<p>Analyzers basically helps you in analyzing your data.<code>:o</code> You need to analyze data while creating indexes and while searching. You could analyze your analyzers using <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze.html">Analyze Api</a> provided by elasticsearch.</p>
+
+<p>Creating indexes mainly involves three steps:</p>
+
+<ul>
+<li><strong>Pre-processing of raw text</strong> using <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/mapping-charfilter/">char filters </a>. This may be used to strip html tags, or you may define your custom mapping.  (<em>Couldn&rsquo;t find a way to test this using analyse api. Please put it in comments if you know some way to test these through Analyze Api</em>)</li>
+</ul>
+
+
+<p>Example: You could use a <strong>char-filter</strong> of type <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/htmlstrip-charfilter/"><code>html_strip</code></a> to strip out html tags.</p>
+
+<p>A text like this:</p>
+
+<p>```html</p>
+
+<p> Learn Something New Today! which is <b>always</b> fun </p>
+
+
+<p>```</p>
+
+<p>would get converted to:</p>
+
+<p><code>
+Learn Something New Today! which is always fun
+</code></p>
+
+<!-- more -->
+
+
+<ul>
+<li><strong>Tokenization of the pre-processed text</strong> using tokenizers. Tokenizers breaks the pre-processed text into tokens. There are different kind of tokenizers available and each of them breaks the text into words differently. By default elasticsearch uses <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/standard-tokenizer/">standard tokenizer</a>.</li>
+</ul>
+
+
+<p>standard tokenizer normalizes the data. Note that it removes <code>!</code> from <code>Today!</code></p>
+
+<p>A pre-processed text like this:</p>
+
+<p><code>Learn Something New Today! which is always fun</code></p>
+
+<p>gets broken as</p>
+
+<p><code>Learn</code> <code>Something</code> <code>New</code> <code>Today</code> <code>which</code> <code>is</code> <code>always</code> <code>fun</code></p>
+
+<p>You could check for yourself using Analyze Api mentioned above.</p>
+
+<p><code>bash
+curl -XGET 'localhost:9200/_analyze?tokenizer=standard' -d 'Learn Something New Today! which is always fun'
+</code>
+<a class="link1" id="show-hide-link-1">show/hide the output</a></p>
+
+<div class="foldable" id="show-hide-block-1">
+```javascript
+{
+    "tokens": [
+        {
+            "end_offset": 5,
+            "position": 1,
+            "start_offset": 0,
+            "token": "Learn",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 15,
+            "position": 2,
+            "start_offset": 6,
+            "token": "Something",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 19,
+            "position": 3,
+            "start_offset": 16,
+            "token": "New",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 25,
+            "position": 4,
+            "start_offset": 20,
+            "token": "Today",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 32,
+            "position": 5,
+            "start_offset": 27,
+            "token": "which",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 35,
+            "position": 6,
+            "start_offset": 33,
+            "token": "is",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 42,
+            "position": 7,
+            "start_offset": 36,
+            "token": "always",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 46,
+            "position": 8,
+            "start_offset": 43,
+            "token": "fun",
+            "type": "<ALPHANUM>"
+        }
+    ]
+}
+```
+<a class="link1">hide</a>
+</div>
+
+
+<ul>
+<li>After the tokenization, <strong>token filters</strong> performs further operations on the processed text like converting it to <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/lowercase-tokenfilter.html">lowercase</a> or <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/reverse-tokenfilter/">reversing</a> of tokens.</li>
+</ul>
+
+
+<p>By default <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/standard-tokenfilter/">standard tokenfilter</a> is used which normalizes the tokens. After the application of lowercase tokenfilter.</p>
+
+<p>A processed text like this:</p>
+
+<p><code>Learn</code> <code>Something</code> <code>New</code> <code>Today</code> <code>which</code> <code>is</code> <code>always</code> <code>fun</code></p>
+
+<p>gets broken as</p>
+
+<p><code>learn</code> <code>something</code> <code>new</code> <code>today</code> <code>which</code> <code>is</code> <code>always</code> <code>fun</code></p>
+
+<p><code>bash Analyze Api
+curl -XGET 'localhost:9200/_analyze?tokenizer=standard&amp;filters=lowercase' -d 'Learn Something New Today! which is always fun'
+</code>
+<a class="link2" id="show-hide-link-2">show/hide the output</a></p>
+
+<div class="foldable" id="show-hide-block-2">
+```
+{
+    "tokens": [
+        {
+            "end_offset": 5,
+            "position": 1,
+            "start_offset": 0,
+            "token": "learn",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 15,
+            "position": 2,
+            "start_offset": 6,
+            "token": "something",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 19,
+            "position": 3,
+            "start_offset": 16,
+            "token": "new",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 25,
+            "position": 4,
+            "start_offset": 20,
+            "token": "today",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 32,
+            "position": 5,
+            "start_offset": 27,
+            "token": "which",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 35,
+            "position": 6,
+            "start_offset": 33,
+            "token": "is",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 42,
+            "position": 7,
+            "start_offset": 36,
+            "token": "always",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 46,
+            "position": 8,
+            "start_offset": 43,
+            "token": "fun",
+            "type": "<ALPHANUM>"
+        }
+    ]
+}
+```
+<a class="link2">hide</a>
+</div>
+
+
+<p>Thus analyzer is composed of char-filters, tokenizers and tokenfilters. Analyzers defines what kind of search you can preform on your data.</p>
+
+<p>You can have multiple indexes on a field and create your own custom char-filters, tokenizers and tokenfilters. You can have different analyzers for different indexes.</p>
+
+<h2>Let&rsquo;s see it in action</h2>
+
+<p>Example below creates an index with <strong>char-filter</strong> as <code>html_strip</code>, <strong>tokenizer</strong> as <code>standard</code> and tokenfilter i.e, <strong>filter</strong> as <code>lowercase</code> and <code>standard</code></p>
+
+<p>```
+curl -XPUT <a href="http://localhost:9200/test">http://localhost:9200/test</a> -d &lsquo;{                                                                                                                 <br/>
+  &ldquo;settings&rdquo;:{</p>
+
+<pre><code>"analysis":{
+  "analyzer":{
+    "default":{
+      "type":"custom",
+      "tokenizer":"standard",
+      "filter":[ "standard", "lowercase" ], 
+      "char_filter" : ["html_strip"]
+    }
+  }
+}
+</code></pre>
+
+<p>  }
+}&lsquo;
+```</p>
+
+<p>You can analyze the text using:
+<code>
+curl 'http://localhost:9200/test/_analyze' -d '&lt;p&gt; Learn Something New Today! which is &lt;b&gt;always&lt;/b&gt; fun &lt;/p&gt;'
+</code></p>
+
+<p><a class="link3" id="show-hide-link-3">show/hide the output</a></p>
+
+<div class="foldable" id="show-hide-block-3">
+```
+{
+    "tokens": [
+        {
+            "end_offset": 9,
+            "position": 1,
+            "start_offset": 4,
+            "token": "learn",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 19,
+            "position": 2,
+            "start_offset": 10,
+            "token": "something",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 23,
+            "position": 3,
+            "start_offset": 20,
+            "token": "new",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 29,
+            "position": 4,
+            "start_offset": 24,
+            "token": "today",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 36,
+            "position": 5,
+            "start_offset": 31,
+            "token": "which",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 39,
+            "position": 6,
+            "start_offset": 37,
+            "token": "is",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 53,
+            "position": 7,
+            "start_offset": 43,
+            "token": "always",
+            "type": "<ALPHANUM>"
+        },
+        {
+            "end_offset": 57,
+            "position": 8,
+            "start_offset": 54,
+            "token": "fun",
+            "type": "<ALPHANUM>"
+        }
+    ]
+}
+```
+<a class="link3">hide</a>
+</div>
+
+
+<p>Above results shows that the while creating index it first stripped off the html tags and broke the text into words. And then converted them to lowercase.</p>
+
+<p>Following the same procedure you can analyze different kind of
+analyzers. Explore different kind of tokenizers, tokenfilters at <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/">http://www.elasticsearch.org/guide/reference/index-modules/analysis/</a></p>
+
+<p>In future posts I will discuss more about how to make custom analyzers and features of elasticsearch like filters and facets.</p>
+
+<script>
+$(document).ready(function(){
+  $(".foldable").hide();
+  $(".link1").click(function(){
+     $("#show-hide-block-1").toggle(700);
+  });
+
+  $(".link2").click(function(){
+     $("#show-hide-block-2").toggle(700);
+  });
+
+  $(".link3").click(function(){
+     $("#show-hide-block-3").toggle(700);
+  });
+
+}); 
+</script>
+
+]]></content>
+  </entry>
+  
+</feed>

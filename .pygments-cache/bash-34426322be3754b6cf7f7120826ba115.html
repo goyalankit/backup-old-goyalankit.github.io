@@ -1,0 +1,15 @@
+<div class="highlight"><pre>curl -XPUT http://localhost:9200/test -d <span class="s1">&#39;{                                                                                                                   </span>
+<span class="s1">  &quot;settings&quot;:{</span>
+<span class="s1">    &quot;analysis&quot;:{</span>
+<span class="s1">      &quot;analyzer&quot;:{</span>
+<span class="s1">        &quot;default&quot;:{</span>
+<span class="s1">          &quot;type&quot;:&quot;custom&quot;,</span>
+<span class="s1">          &quot;tokenizer&quot;:&quot;standard&quot;,</span>
+<span class="s1">          &quot;filter&quot;:[ &quot;standard&quot;, &quot;lowercase&quot; ], </span>
+<span class="s1">          &quot;char_filter&quot; : [&quot;html_strip&quot;]</span>
+<span class="s1">        }</span>
+<span class="s1">      }</span>
+<span class="s1">    }</span>
+<span class="s1">  }</span>
+<span class="s1">}&#39;</span>
+</pre></div>
