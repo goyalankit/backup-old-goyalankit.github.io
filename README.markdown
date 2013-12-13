@@ -14,6 +14,19 @@ Octopress is [Jekyll](https://github.com/mojombo/jekyll) blogging at its finest.
 Check out [Octopress.org](http://octopress.org/docs) for guides and documentation.
 
 
+## To set an existing octopress blog
+```
+git clone git@github.com:goyalankit/goyalankit.github.io.git
+cd goyalankit.github.io.git
+git checkout source
+
+mkdir _deploy && cd _deploy
+git init
+git remote add origin git@github.com:goyalankit/goyalankit.github.io.git
+git pull origin master
+cd ..
+```
+
 ## Contributing
 
 [![Build Status](https://travis-ci.org/imathis/octopress.png?branch=master)](https://travis-ci.org/imathis/octopress)
