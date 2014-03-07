@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: labs | Ankit Goyal]]></title>
+  <title><![CDATA[Category: labs | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/labs/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2013-12-25T19:56:27-06:00</updated>
+  <updated>2014-01-11T22:58:17-06:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
