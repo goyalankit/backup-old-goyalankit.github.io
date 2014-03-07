@@ -41,8 +41,6 @@ It generates the following directory structure, when generated using `modularize
       |-- myapp.rb
       |-- public
       |-- script
-      |   |-- destroy
-      |   `-- generate
       |-- spec
       |   |-- controllers
       |   |   `-- user_spec.rb
@@ -65,7 +63,7 @@ It generated some usual ruby files like
 Note the **lib/models** in above point. You could create a directory called `models` in lib directory to place your models and it will also be loaded.
 
 * **public** - To serve public assets.
-* **script** - You could get rid of this directory. In future version this directory will not be generated.
+* **script** - You could get rid of this directory. This is just a container to put your scripts.
 * **spec** - Place your specifications inside this. modularize_sinatra integrates rspec for you by default. 
 
 Please contribute at http://github.com/goyalankit/modularize_sinatra
