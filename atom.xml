@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-01-11T22:58:17-06:00</updated>
+  <updated>2014-03-06T19:57:25-06:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -591,8 +591,6 @@ $(document).ready(function(){
   |-- myapp.rb
   |-- public
   |-- script
-  |   |-- destroy
-  |   `-- generate
   |-- spec
   |   |-- controllers
   |   |   `-- user_spec.rb
@@ -617,7 +615,7 @@ $(document).ready(function(){
 
 <ul>
 <li><strong>public</strong> &ndash; To serve public assets.</li>
-<li><strong>script</strong> &ndash; You could get rid of this directory. In future version this directory will not be generated.</li>
+<li><strong>script</strong> &ndash; You could get rid of this directory. This is just a container to put your scripts.</li>
 <li><strong>spec</strong> &ndash; Place your specifications inside this. modularize_sinatra integrates rspec for you by default.</li>
 </ul>
 
