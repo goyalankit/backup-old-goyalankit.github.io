@@ -32,5 +32,6 @@ I am on <a href="http://twitter.com/_goyalankit">Twitter</a>, <a href="http://ww
 
 
 ### Contact me
+---
 
 If you want to get in touch, send <a href="mailto:me@goyalankit.com">an email</a>
