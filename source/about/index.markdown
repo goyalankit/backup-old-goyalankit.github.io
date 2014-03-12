@@ -6,6 +6,7 @@ comments: false
 sharing: false
 footer: true
 published: true
+decrease-header-padding: true
 ---
 
 ### About me

@@ -1,3 +1,9 @@
 {% if page.sharing != false %}
 {% include social.html %}
 {% endif %}
+
+
+{% if page.decrease-header-padding == true%}
+   <style> article { padding-top: 5px; } </style>
+{% endif %}
+
