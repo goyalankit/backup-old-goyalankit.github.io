@@ -3,14 +3,13 @@ layout: post
 title: star in ruby
 date: 2014-03-15 00:11
 comments: true
-categories: Ruby, Programming
+categories: Ruby, Programming, Code
 published: true
 ---
 
 I have seen the Ruby's `*` operator used at several places in different
 ways and often times I get confused the way it is used. Finally I decided to learn more about it and here are few interesting roles of `*` operator that I found in Ruby.
 It can be used to multiply, repeat, copy or as a splat operator.
-
 
 
 ---
