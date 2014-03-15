@@ -1,0 +1,485 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
+	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<meta charset="utf-8">
+	<title>star in ruby  | /home/ankit</title>
+
+<meta name="author" content="Ankit Goyal"> 
+
+<meta name="description" content="I have seen the Ruby&rsquo;s * operator used at several places in different
+ways and often times I get confused the way it is used. Finally I decided &hellip;"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="/home/ankit" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script language="Javascript" type="text/javascript">
+$(document).ready(
+  function() {
+    (function($) {
+      $(".fancybox[data-content-id]").each(function() {
+        this.href = $(this).data('content-id');
+      });
+      $(".fancybox").fancybox({
+        beforeLoad: function() {
+          var el, 
+              id = $(this.element).data('title-id');
+
+          if (id) {
+            el = $('#' + id);
+
+            if (el.length) {
+              this.title = el.html();
+            }
+          }
+          if ($(this).data('content')) {
+            this.content = $(this).data('content');
+          }
+        },
+        helpers: {
+          title: {
+            type: 'inside'
+          }
+        }
+      });
+    })(jQuery);
+  }
+);
+</script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">/home/ankit</a></h1>
+<h4>developer. curious. learner.</h4>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+    <li><a href="/about">About</a></li>
+	<li><a href="/labs">Labs</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+    <li><a href="/about">About</a></li>
+	<li><a href="/labs">Labs</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:goyalankit.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+<nav id="sub-nav">
+	<div class="social">
+		<a title="Twitter" href="http://twitter.com/_goyalankit" class="twitter">Twitter</a>
+		<a title="GitHub" href="https://github.com/goyalankit" class="github">GitHub</a>
+		<a title="Linkedin" href="http://www.linkedin.com/in/goyalankit3" class="linkedin">Linkedin</a>
+		<a title="RSS" href="/atom.xml" class="rss">RSS</a>
+	</div>
+</nav>
+
+
+
+
+
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">star in ruby</h2>
+	<div class="entry-content"><p>I have seen the Ruby&rsquo;s <code>*</code> operator used at several places in different
+ways and often times I get confused the way it is used. Finally I decided to learn more about it and here are few interesting roles of <code>*</code> operator that I found in Ruby.
+It can be used to multiply, repeat, copy or as a splat operator.</p>
+
+<hr />
+
+<h3>Multiplication</h3>
+
+<p>This is the most obvious role of <code>*</code>. It&rsquo;s the multiplication operator. <code>2 * 2 = 4</code></p>
+
+<p>Or an instance method of <strong>Fixnum</strong> class to perform multiplication. <code>2.*(2) = 4</code></p>
+
+<!-- more -->
+
+
+<hr />
+
+<h3>Repetition</h3>
+
+<p>Several classes in Ruby defines <code>*</code> operator as a Repetition method.</p>
+
+<ul>
+<li><strong>Array</strong> class defines <strong>*</strong> for two different possible type of parameters.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ary * int -&gt; new_ary
+</span><span class='line'>ary * str -&gt; new_str</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For string type it acts as a <code>join</code> method. Examples:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="c1"># =&gt; [1, 2, 3, 1, 2, 3, 1, 2, 3]</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span> <span class="o">*</span> <span class="s1">&#39;,&#39;</span> <span class="c1"># =&gt; &quot;1,2,3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><strong>String</strong> class defines <strong>*</strong> as a <strong>copy</strong> operator. It returns a new string
+containing <strong>n</strong> copies of the string. For example:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="s2">&quot;ho! &quot;</span> <span class="o">*</span> <span class="mi">3</span> <span class="c1"># =&gt; &quot;ho! ho! ho! &quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that <strong><code>String * str</code></strong> is not defined.</p>
+
+<hr />
+
+<h3>Splat</h3>
+
+<p>Another less known use of <code>*</code> is as a <strong>splat</strong> operator. Consider
+following example where we want to convert options_array to
+options_hash.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">options_array</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:first_name</span><span class="p">,</span> <span class="s2">&quot;Ankit&quot;</span><span class="p">,</span> <span class="ss">:last_name</span><span class="p">,</span> <span class="s2">&quot;Goyal&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># to</span>
+</span><span class='line'><span class="n">options_hash</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ankit&quot;</span><span class="p">,</span> <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Goyal&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You will see that <a href="http://www.ruby-doc.org/core-2.1.0/Hash.html#method-c-5B-5D"><code>[]</code></a> method in <strong>Hash</strong> class takes [key, value, &hellip;] as an argument and
+creates a Hash for you. For example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&gt;</span> <span class="no">Hash</span><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># {1 =&gt; 2, 3 =&gt; 4}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So how can we use <code>[]</code> method to get the required hash?  You can see in
+documentation that <code>[]</code> doesn&rsquo;t
+take array as a parameter or you can try running it. It will return you an empty hash with lot of warnings. So we can&rsquo;t call <code>Hash[options_array]</code> directly.</p>
+
+<ul>
+<li>We can use splat <code>*</code> operator to convert our array into arguments. If
+you call <code>[]</code> with <code>*options_array</code> as a parameter, you&rsquo;ll get the
+required hash back.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">options_hash</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">[*</span><span class="n">options_array</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># {:first_name =&gt; &quot;Ankit&quot;, :last_name =&gt; &quot;Goyal&quot;}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So splat converts <code>*options_array</code> to an argument list. Let&rsquo;s see some
+other interesting uses of splat operator.</p>
+
+<p><strong>Splat</strong> can be used to convert an array to argument list as shown above. You can call methods by dynamically generating arguments with minimal
+amount of code. For example, if you have a <strong>string</strong> with &lsquo;,&rsquo; separated
+values of arguments.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">def</span> <span class="nf">do_it</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">arg1</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">arg2</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">arg3</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">arguments</span> <span class="o">=</span> <span class="s2">&quot;arg1,arg2,arg3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can call <code>do_it</code> method with <code>arg1</code>, <code>arg2</code> and <code>arg3</code> as arguments
+using splat like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">do_it</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;arg1 arg2 arg3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can also convert list of arguments back to array using splat. For
+example:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">*</span><span class="n">argument_array</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">argument_array</span>
+</span><span class='line'><span class="c1"># =&gt; [1, 2, 3]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Note</strong> that you don&rsquo;t need to use splat for the above code to work.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">argument_array</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">argument_array</span>
+</span><span class='line'><span class="c1"># =&gt; [1, 2, 3]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>is equally valid. But it&rsquo;s good to know that you can do it using splat
+also.</p>
+
+<p>However, a case where splat comes in handy is to define multiple
+variables. Let&rsquo;s see an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above fact is mostly used in defining methods with optional arguments.
+This is one of the most common uses of the splat operator.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">def</span> <span class="nf">do_it2</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">*</span><span class="n">options</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">arg1</span><span class="si">}</span><span class="s2"> - </span><span class="si">#{</span><span class="n">arg2</span><span class="si">}</span><span class="s2"> - </span><span class="si">#{</span><span class="n">options</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">do_it2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="ss">:cool</span><span class="p">,</span> <span class="s2">&quot;abc&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; 1 - 2 - [3, 4, 5, :cool, &quot;abc&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is not necessary to have the splat argument at the end in the
+method! For example definition like this is equally valid:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">def</span> <span class="nf">do_it3</span><span class="p">(</span><span class="o">*</span><span class="n">options</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">arg1</span><span class="si">}</span><span class="s2"> - </span><span class="si">#{</span><span class="n">arg2</span><span class="si">}</span><span class="s2"> - </span><span class="si">#{</span><span class="n">options</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># You must call the method with 2 or more arguments.</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">do_it3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">hello</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; 2 - hello - [1]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However it&rsquo;s invalid to have more than 1 splat arguments.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># This is not valid</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">do_it_invalid</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can also use splat operator to convert Hash into an array of
+arrays. For example:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">options_hash</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ankit&quot;</span><span class="p">,</span> <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Goyal&quot;</span><span class="p">}</span>
+</span><span class='line'><span class="n">options_array_of_array</span> <span class="o">=</span> <span class="o">*</span><span class="n">options_hash</span>
+</span><span class='line'><span class="c1"># =&gt; [[:first_name, &quot;Ankit&quot;], [:last_name, &quot;Goyal&quot;]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can use splat operator to un-nest arrays. For example:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[*[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">a</span>
+</span><span class='line'><span class="c1"># =&gt; [1, 2, 3, 4]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Splat operator can possibly be used in several creative ways. If you
+know some other way that splash could be used feel free to suggest it in comments.</p>
+
+<p>References/Further Reading:</p>
+
+<ol>
+<li><a href="http://endofline.wordpress.com/2011/01/21/the-strange-ruby-splat/">http://endofline.wordpress.com/2011/01/21/the-strange-ruby-splat/</a></li>
+<li><a href="http://www.jacopretorius.net/2012/01/splat-operator-in-ruby.html">http://www.jacopretorius.net/2012/01/splat-operator-in-ruby.html</a></li>
+<li><a href="http://www.ruby-doc.org/">http://www.ruby-doc.org/</a></li>
+</ol>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-15T00:11:00-05:00" pubdate data-updated="true">Mar 15<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/code/'>Code</a>, <a class='category' href='/blog/categories/programming/'>Programming,</a>, <a class='category' href='/blog/categories/ruby/'>Ruby,</a>
+
+
+</div>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+<!---	<a class="addthis_counter addthis_pill_style"></a> --->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<nav id="pagenavi">
+  <p class="meta">
+  
+  <a class="prev nohover" id="nohover" href="/blog/2013/07/24/elasticsearch-basics/" title="Previous Post: elasticsearch basics - Analyzers">&laquo; elasticsearch basics - Analyzers</a>
+  
+  
+  </p>
+</nav>
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Ankit Goyal
+
+<br>
+Powered by Octopress.
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'goyalankit';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby/';
+        var disqus_url = 'http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-37320558-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
