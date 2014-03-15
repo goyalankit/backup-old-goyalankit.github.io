@@ -1,14 +1,15 @@
 ---
 layout: post
-title: Star in Ruby
+title: star in ruby
 date: 2014-03-15 00:11
 comments: true
-categories: 
+categories: Ruby, Programming
 published: true
 ---
 
 I have seen the Ruby's `*` operator used at several places in different
 ways and often times I get confused the way it is used. Finally I decided to learn more about it and here are few interesting roles of `*` operator that I found in Ruby.
+It can be used to multiply, repeat, copy or as a splat operator.
 
 
 
@@ -16,9 +17,9 @@ ways and often times I get confused the way it is used. Finally I decided to lea
 
 ### Multiplication
 
-This is most obvious role of `*`. It's the multiplication operator. `2 * 2 = 4`
+This is the most obvious role of `*`. It's the multiplication operator. `2 * 2 = 4`
 
-Or an instance method of `Fixnum` class to perform multiplication. `2.*(2) = 4`
+Or an instance method of **Fixnum** class to perform multiplication. `2.*(2) = 4`
 
 <!-- more -->
 ---
@@ -27,7 +28,7 @@ Or an instance method of `Fixnum` class to perform multiplication. `2.*(2) = 4`
 
 Several classes in Ruby defines `*` operator as a Repetition method.
 
-* `Array` class defines `*` for two different possible type of parameters.
+* **Array** class defines **\*** for two different possible type of parameters.
 
 ```
 ary * int -> new_ary
@@ -43,16 +44,15 @@ For string type it acts as a `join` method. Examples:
 
 ```
 
-* `String` class defined `*` as a **copy** operator. It returns a new string
-containing n copies of the string. For example:
+* **String** class defines **\*** as a **copy** operator. It returns a new string
+containing **n** copies of the string. For example:
 
 ```rb
 
 "ho! " * 3 # => "ho! ho! ho! "
 
 ```
-Note that `String` `*` `str` is not defined.
-
+Note that **`String * str`** is not defined.
 
 ---
 
@@ -69,7 +69,7 @@ options_hash = {:first_name => "Ankit", :last_name => "Goyal"}
 
 ```
 
-You will see that [`[]`]( http://www.ruby-doc.org/core-2.1.0/Hash.html#method-c-5B-5D ) method in `Hash` class takes [key, value, ...] as an argument and
+You will see that [`[]`]( http://www.ruby-doc.org/core-2.1.0/Hash.html#method-c-5B-5D ) method in **Hash** class takes [key, value, ...] as an argument and
 creates a Hash for you. For example:
 ```
 > Hash[1,2,3,4]
@@ -80,7 +80,7 @@ So how can we use `[]` method to get the required hash?  You can see in
 documentation that `[]` doesn't
 take array as a parameter or you can try running it. It will return you an empty hash with lot of warnings. So we can't call `Hash[options_array]` directly. 
 
-We can use splat `*` operator to convert our array into arguments. If
+* We can use splat `*` operator to convert our array into arguments. If
 you call `[]` with `*options_array` as a parameter, you'll get the
 required hash back.
 
@@ -113,7 +113,7 @@ do_it(*arguments.split(','))
 # => "arg1 arg2 arg3"
 ```
 
-You can convert list of arguments back to array using splat. For
+* You can also convert list of arguments back to array using splat. For
 example:
 
 ```
@@ -172,5 +172,36 @@ def do_it_invalid(*a, *b)
 end
 ```
 
-Splat operator can possibly be used in many different ways. Feel free to
-suggest more uses in comments.
+* You can also use splat operator to convert Hash into an array of
+  arrays. For example:
+
+```rb
+
+options_hash = {:first_name => "Ankit", :last_name => "Goyal"}
+options_array_of_array = *options_hash
+# => [[:first_name, "Ankit"], [:last_name, "Goyal"]]
+
+```
+
+* You can use splat operator to un-nest arrays. For example:
+
+```
+
+a = [*[1,2], 3, 4]
+
+> a
+# => [1, 2, 3, 4]
+```
+
+Splat operator can possibly be used in several creative ways. If you
+know some other way that splash could be used feel free to suggest it in comments.
+
+
+References/Further Reading:
+
+1. http://endofline.wordpress.com/2011/01/21/the-strange-ruby-splat/
+2. http://www.jacopretorius.net/2012/01/splat-operator-in-ruby.html
+3. http://www.ruby-doc.org/
+
+
+
