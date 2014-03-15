@@ -99,7 +99,7 @@ values of arguments.
 
 ```
 def do_it(arg1, arg2, arg3)
-    p "#{arg1} #{arg2} #{arg3}"
+    puts "#{arg1} #{arg2} #{arg3}"
 end
 
 arguments = "arg1,arg2,arg3"
@@ -130,3 +130,47 @@ argument_array = 1, 2, 3
 ```
 is equally valid. But it's good to know that you can do it using splat
 also.
+
+However, a case where splat comes in handy is to define multiple
+variables. Let's see an example:
+
+```rb
+a, b, *c = 1, 2, 3, 4, 5, 6
+```
+
+Above fact is mostly used in defining methods with optional arguments.
+This is one of the most common uses of the splat operator.
+
+```
+def do_it2(arg1, arg2, *options)
+    puts "#{arg1} - #{arg2} - #{options}"
+end
+
+do_it2(1, 2, 3, 4, 5, :cool, "abc")
+# => 1 - 2 - [3, 4, 5, :cool, "abc"]
+```
+
+It is not necessary to have the splat argument at the end in the
+method! For example definition like this is equally valid:
+
+```
+def do_it3(*options, arg1, arg2)
+    puts "#{arg1} - #{arg2} - #{options}"
+end
+
+# You must call the method with 2 or more arguments.
+> do_it3(1,2, hello)
+# => 2 - hello - [1]
+
+```
+
+However it's invalid to have more than 1 splat arguments.
+
+```
+# This is not valid
+def do_it_invalid(*a, *b)
+end
+```
+
+Splat operator can possibly be used in many different ways. Feel free to
+suggest more uses in comments.
