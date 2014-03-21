@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "the concept of concept checking - part 1"
+title: "learning concept checking the hard way - part 1"
 date: 2014-03-21 15:27
 comments: true
 categories: code programming cpp templates concept-checking
+published: true
 ---
 
 What is a concept in C++?
@@ -100,5 +101,8 @@ In the next post, we'll implement our own short version of concept
 checking. It involves some really cool template tricks and C++ trivia.
 
 Feel free to comment and give suggestions.
+
+References/Further Reading:
+1. http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm
 
 
