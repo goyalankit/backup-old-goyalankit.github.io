@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-15T03:30:43-05:00</updated>
+  <updated>2014-03-21T18:32:30-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -12,6 +12,155 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[learning concept checking the hard way - part 1]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1/"/>
+    <updated>2014-03-21T15:27:00-05:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1</id>
+    <content type="html"><![CDATA[<p>What is a concept in C++?</p>
+
+<blockquote><p>A concept is a set of requirements (valid expressions, associated types, semantic invariants, complexity guarantees, etc.)
+that a type must fulfill to be correctly used as arguments in a call to a generic algorithm</p></blockquote>
+
+<p>For example if you write your own generic implementation for
+<code>BinarySearchTree</code>. It should basically work for any type for which <code>&lt;</code>
+operator is defined. As long as you have that condition satisfied you
+can build a binary search tree for that type. For instance, <code>&lt;</code> is defined for
+<code>int</code>, <code>double</code>. However it&rsquo;s not defined for <code>complex</code> numbers. C++ has
+no explicit mechanism for representing concepts.</p>
+
+<p>Consider the following possible way
+you may write your generic Binary Search Tree.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include&lt;iostream&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">BinarySearchTree</span><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="c1">// dummy method to insert a new node to the tree</span>
+</span><span class='line'>    <span class="kt">void</span> <span class="n">insert</span><span class="p">(</span><span class="n">T</span> <span class="n">value</span><span class="p">,</span> <span class="n">T</span> <span class="n">parent</span><span class="p">){</span>
+</span><span class='line'>        <span class="c1">// calling `&lt;` operator. Compilation will fail if it doesn&#39;t exist</span>
+</span><span class='line'>        <span class="c1">// for a type.</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">parent</span><span class="p">){</span>
+</span><span class='line'>            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Less than operator exists&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>            <span class="c1">//insert to the left of binary tree.</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
+</span><span class='line'>    <span class="c1">// instantiating template with int</span>
+</span><span class='line'>    <span class="n">BinarySearchTree</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bint</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">bint</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">// instantiating template with double</span>
+</span><span class='line'>    <span class="n">BinarySearchTree</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">bdouble</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">bdouble</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">1.23</span><span class="p">,</span><span class="mf">3.13</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">g</span><span class="o">++</span> <span class="n">b</span><span class="p">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">btree</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">.</span><span class="o">/</span><span class="n">btree</span>
+</span><span class='line'><span class="n">Less</span> <span class="n">than</span> <span class="k">operator</span> <span class="n">exists</span>
+</span><span class='line'><span class="n">Less</span> <span class="n">than</span> <span class="k">operator</span> <span class="n">exists</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Awesome, so it works for both doube and int, since <code>&lt;</code> is defined for
+them. What happens if you try it with complex numbers? let&rsquo;s see:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="c1">//include the complex lib</span>
+</span><span class='line'><span class="cp">#include &lt;complex&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// In main function</span>
+</span><span class='line'><span class="c1">// instantiating template with complex</span>
+</span><span class='line'><span class="n">BinarySearchTree</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">complex</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">bcomplex</span><span class="p">;</span>
+</span><span class='line'><span class="n">bcomplex</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">complex</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">complex</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you try to run your <code>BinarySearchTree</code> implementation for <code>complex</code>
+numbers you will get a compile time error. So the question is how do you
+check if a class has a certain method defined or not. Above Example is a
+trivial example to show you the use case, the error could be buried deep
+into your code and may not represent the actual reason for
+failure. Boost documentation gives a <a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm"> good example </a>.</p>
+
+<p>In short it would be good to have a <code>has_less</code> method for a generic type
+that determines if the given type has a <code>&lt;</code> method defined or not. Using
+this method you can give your user a more meaningful error.</p>
+
+<p>Note that you can use concept checking provided by boost library. You&rsquo;d
+need to do something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include &lt;boost/concept_check.hpp&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//inside class</span>
+</span><span class='line'><span class="n">BOOST_CLASS_REQUIRE</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">boost</span><span class="p">,</span> <span class="n">LessThanComparableConcept</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more info: visit <a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm">http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm</a></p>
+
+<p>In the next post, we&rsquo;ll implement our own short version of concept
+checking. It involves some really cool template tricks and C++ trivia.</p>
+
+<p>Feel free to comment and give suggestions.</p>
+
+<p>References:</p>
+
+<ol>
+<li><a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm">http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[star in ruby]]></title>

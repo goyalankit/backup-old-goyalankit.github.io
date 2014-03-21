@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Programming, | /home/ankit]]></title>
+  <title><![CDATA[Category: programming | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-15T03:30:43-05:00</updated>
+  <updated>2014-03-21T18:32:30-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -14,255 +14,119 @@
 
   
   <entry>
-    <title type="html"><![CDATA[star in ruby]]></title>
-    <link href="http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby/"/>
-    <updated>2014-03-15T00:11:00-05:00</updated>
-    <id>http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby</id>
-    <content type="html"><![CDATA[<p>I have seen the Ruby&rsquo;s <code>*</code> operator used at several places in different
-ways and often times I get confused the way it is used. Finally I decided to learn more about it and here are few interesting roles of <code>*</code> operator that I found in Ruby.
-It can be used to multiply, repeat, copy or as a splat operator.</p>
+    <title type="html"><![CDATA[learning concept checking the hard way - part 1]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1/"/>
+    <updated>2014-03-21T15:27:00-05:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1</id>
+    <content type="html"><![CDATA[<p>What is a concept in C++?</p>
 
-<hr />
+<blockquote><p>A concept is a set of requirements (valid expressions, associated types, semantic invariants, complexity guarantees, etc.)
+that a type must fulfill to be correctly used as arguments in a call to a generic algorithm</p></blockquote>
 
-<h3>Multiplication</h3>
+<p>For example if you write your own generic implementation for
+<code>BinarySearchTree</code>. It should basically work for any type for which <code>&lt;</code>
+operator is defined. As long as you have that condition satisfied you
+can build a binary search tree for that type. For instance, <code>&lt;</code> is defined for
+<code>int</code>, <code>double</code>. However it&rsquo;s not defined for <code>complex</code> numbers. C++ has
+no explicit mechanism for representing concepts.</p>
 
-<p>This is the most obvious role of <code>*</code>. It&rsquo;s the multiplication operator. <code>2 * 2 = 4</code></p>
+<p>Consider the following possible way
+you may write your generic Binary Search Tree.</p>
 
-<p>Or an instance method of <strong>Fixnum</strong> class to perform multiplication. <code>2.*(2) = 4</code></p>
+<p>```c++</p>
 
-<!-- more -->
+<h1>include<iostream></h1>
 
+<p>template <typename T>
+class BinarySearchTree{</p>
 
-<hr />
-
-<h3>Repetition</h3>
-
-<p>Several classes in Ruby defines <code>*</code> operator as a Repetition method.</p>
-
-<ul>
-<li><strong>Array</strong> class defines <strong>*</strong> for two different possible type of parameters.</li>
-</ul>
-
-
-<p><code>
-ary * int -&gt; new_ary
-ary * str -&gt; new_str
-</code></p>
-
-<p>For string type it acts as a <code>join</code> method. Examples:</p>
-
-<p>```rb
-[1,2,3] * 3 # => [1, 2, 3, 1, 2, 3, 1, 2, 3]</p>
-
-<p>[1,2,3] * &lsquo;,&rsquo; # => &ldquo;1,2,3&rdquo;</p>
-
-<p>```</p>
-
-<ul>
-<li><strong>String</strong> class defines <strong>*</strong> as a <strong>copy</strong> operator. It returns a new string
-containing <strong>n</strong> copies of the string. For example:</li>
-</ul>
-
-
-<p>```rb</p>
-
-<p>&ldquo;ho! &rdquo; * 3 # => &ldquo;ho! ho! ho! &rdquo;</p>
-
-<p><code>``
-Note that **</code>String * str`** is not defined.</p>
-
-<hr />
-
-<h3>Splat</h3>
-
-<p>Another less known use of <code>*</code> is as a <strong>splat</strong> operator. Consider
-following example where we want to convert options_array to
-options_hash.</p>
-
-<p>```rb
-options_array = [:first_name, &ldquo;Ankit&rdquo;, :last_name, &ldquo;Goyal&rdquo;]</p>
-
-<h1>to</h1>
-
-<p>options_hash = {:first_name => &ldquo;Ankit&rdquo;, :last_name => &ldquo;Goyal&rdquo;}</p>
-
-<p>```</p>
-
-<p>You will see that <a href="http://www.ruby-doc.org/core-2.1.0/Hash.html#method-c-5B-5D"><code>[]</code></a> method in <strong>Hash</strong> class takes [key, value, &hellip;] as an argument and
-creates a Hash for you. For example:
-```</p>
-
-<blockquote><p>Hash[1,2,3,4]</p>
-
-<h1>{1 => 2, 3 => 4}</h1>
-
-<p>```</p></blockquote>
-
-<p>So how can we use <code>[]</code> method to get the required hash?  You can see in
-documentation that <code>[]</code> doesn&rsquo;t
-take array as a parameter or you can try running it. It will return you an empty hash with lot of warnings. So we can&rsquo;t call <code>Hash[options_array]</code> directly.</p>
-
-<ul>
-<li>We can use splat <code>*</code> operator to convert our array into arguments. If
-you call <code>[]</code> with <code>*options_array</code> as a parameter, you&rsquo;ll get the
-required hash back.</li>
-</ul>
-
-
-<p>```rb
-options_hash = Hash[*options_array]</p>
-
-<h1>{:first_name => &ldquo;Ankit&rdquo;, :last_name => &ldquo;Goyal&rdquo;}</h1>
-
-<p>```</p>
-
-<p>So splat converts <code>*options_array</code> to an argument list. Let&rsquo;s see some
-other interesting uses of splat operator.</p>
-
-<p><strong>Splat</strong> can be used to convert an array to argument list as shown above. You can call methods by dynamically generating arguments with minimal
-amount of code. For example, if you have a <strong>string</strong> with &lsquo;,&rsquo; separated
-values of arguments.</p>
-
-<p>```
-def do_it(arg1, arg2, arg3)</p>
-
-<pre><code>puts "#{arg1} #{arg2} #{arg3}"
+<pre><code>public:
+// dummy method to insert a new node to the tree
+void insert(T value, T parent){
+    // calling `&lt;` operator. Compilation will fail if it doesn't exist
+    // for a type.
+    if(value &lt; parent){
+        std::cout &lt;&lt; "Less than operator exists" &lt;&lt; std::endl;
+        //insert to the left of binary tree.
+    }
+}
 </code></pre>
 
-<p>end</p>
+<p>};</p>
 
-<p>arguments = &ldquo;arg1,arg2,arg3&rdquo;
-```</p>
+<p>int main(int argc, char* argv[]){</p>
 
-<p>You can call <code>do_it</code> method with <code>arg1</code>, <code>arg2</code> and <code>arg3</code> as arguments
-using splat like this:</p>
+<pre><code>// instantiating template with int
+BinarySearchTree&lt;int&gt; bint;
+bint.insert(1,2);
+// instantiating template with double
+BinarySearchTree&lt;double&gt; bdouble;
+bdouble.insert(1.23,3.13);
 
-<p>```
-do_it(*arguments.split(&lsquo;,&rsquo;))</p>
-
-<h1>=> &ldquo;arg1 arg2 arg3&rdquo;</h1>
-
-<p>```</p>
-
-<ul>
-<li>You can also convert list of arguments back to array using splat. For
-example:</li>
-</ul>
-
-
-<p>```
-*argument_array = 1, 2, 3</p>
-
-<blockquote><p>argument_array</p>
-
-<h1>=> [1, 2, 3]</h1>
-
-<p>```</p></blockquote>
-
-<p><strong>Note</strong> that you don&rsquo;t need to use splat for the above code to work.
-```
-argument_array = 1, 2, 3</p>
-
-<blockquote><p>argument_array</p>
-
-<h1>=> [1, 2, 3]</h1>
-
-<p>```
-is equally valid. But it&rsquo;s good to know that you can do it using splat
-also.</p></blockquote>
-
-<p>However, a case where splat comes in handy is to define multiple
-variables. Let&rsquo;s see an example:</p>
-
-<p><code>rb
-a, b, *c = 1, 2, 3, 4, 5, 6
-</code></p>
-
-<p>Above fact is mostly used in defining methods with optional arguments.
-This is one of the most common uses of the splat operator.</p>
-
-<p>```
-def do_it2(arg1, arg2, *options)</p>
-
-<pre><code>puts "#{arg1} - #{arg2} - #{options}"
+return 0;
 </code></pre>
 
-<p>end</p>
-
-<p>do_it2(1, 2, 3, 4, 5, :cool, &ldquo;abc&rdquo;)</p>
-
-<h1>=> 1 &ndash; 2 &ndash; [3, 4, 5, :cool, &ldquo;abc&rdquo;]</h1>
+<p>}</p>
 
 <p>```</p>
 
-<p>It is not necessary to have the splat argument at the end in the
-method! For example definition like this is equally valid:</p>
+<p>```</p>
+
+<blockquote><blockquote><p>g++ b.cpp -o btree
+./btree
+Less than operator exists
+Less than operator exists
+```</p></blockquote></blockquote>
+
+<p>Awesome, so it works for both doube and int, since <code>&lt;</code> is defined for
+them. What happens if you try it with complex numbers? let&rsquo;s see:</p>
 
 <p>```
-def do_it3(*options, arg1, arg2)</p>
+//include the complex lib</p>
 
-<pre><code>puts "#{arg1} - #{arg2} - #{options}"
-</code></pre>
+<h1>include <complex></h1>
 
-<p>end</p>
-
-<h1>You must call the method with 2 or more arguments.</h1>
-
-<blockquote><p>do_it3(1,2, hello)</p>
-
-<h1>=> 2 &ndash; hello &ndash; [1]</h1></blockquote>
+<p>// In main function
+// instantiating template with complex
+BinarySearchTree&lt;std::complex<int> > bcomplex;
+bcomplex.insert(std::complex<int>(1,2), std::complex<int>(4,5));</p>
 
 <p>```</p>
 
-<p>However it&rsquo;s invalid to have more than 1 splat arguments.</p>
+<p>If you try to run your <code>BinarySearchTree</code> implementation for <code>complex</code>
+numbers you will get a compile time error. So the question is how do you
+check if a class has a certain method defined or not. Above Example is a
+trivial example to show you the use case, the error could be buried deep
+into your code and may not represent the actual reason for
+failure. Boost documentation gives a <a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm"> good example </a>.</p>
+
+<p>In short it would be good to have a <code>has_less</code> method for a generic type
+that determines if the given type has a <code>&lt;</code> method defined or not. Using
+this method you can give your user a more meaningful error.</p>
+
+<p>Note that you can use concept checking provided by boost library. You&rsquo;d
+need to do something like this:</p>
 
 <p>```</p>
 
-<h1>This is not valid</h1>
+<h1>include &lt;boost/concept_check.hpp></h1>
 
-<p>def do_it_invalid(<em>a, </em>b)
-end
-```</p>
-
-<ul>
-<li>You can also use splat operator to convert Hash into an array of
-arrays. For example:</li>
-</ul>
-
-
-<p>```rb</p>
-
-<p>options_hash = {:first_name => &ldquo;Ankit&rdquo;, :last_name => &ldquo;Goyal&rdquo;}
-options_array_of_array = *options_hash</p>
-
-<h1>=> [[:first_name, &ldquo;Ankit&rdquo;], [:last_name, &ldquo;Goyal&rdquo;]]</h1>
+<p>//inside class
+BOOST_CLASS_REQUIRE(T, boost, LessThanComparableConcept);</p>
 
 <p>```</p>
 
-<ul>
-<li>You can use splat operator to un-nest arrays. For example:</li>
-</ul>
+<p>For more info: visit <a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm">http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm</a></p>
 
+<p>In the next post, we&rsquo;ll implement our own short version of concept
+checking. It involves some really cool template tricks and C++ trivia.</p>
 
-<p>```</p>
+<p>Feel free to comment and give suggestions.</p>
 
-<p>a = [*[1,2], 3, 4]</p>
-
-<blockquote><p>a</p>
-
-<h1>=> [1, 2, 3, 4]</h1>
-
-<p>```</p></blockquote>
-
-<p>Splat operator can possibly be used in several creative ways. If you
-know some other way that splash could be used feel free to suggest it in comments.</p>
-
-<p>References/Further Reading:</p>
+<p>References:</p>
 
 <ol>
-<li><a href="http://endofline.wordpress.com/2011/01/21/the-strange-ruby-splat/">http://endofline.wordpress.com/2011/01/21/the-strange-ruby-splat/</a></li>
-<li><a href="http://www.jacopretorius.net/2012/01/splat-operator-in-ruby.html">http://www.jacopretorius.net/2012/01/splat-operator-in-ruby.html</a></li>
-<li><a href="http://www.ruby-doc.org/">http://www.ruby-doc.org/</a></li>
+<li><a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm">http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm</a></li>
 </ol>
 
 ]]></content>

@@ -5,11 +5,11 @@
 	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
 	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<meta charset="utf-8">
-	<title>developer. curious. learner.  | /home/ankit</title>
+	<title>learning concept checking the hard way - part 1  | /home/ankit</title>
 
 <meta name="author" content="Ankit Goyal"> 
 
-<meta name="description" content="What is a concept in C++? A concept is a set of requirements (valid expressions, associated types, semantic invariants, complexity guarantees, etc &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="What is a concept in C++? A concept is a set of requirements (valid expressions, associated types, semantic invariants, complexity guarantees, etc.) &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -109,18 +109,9 @@ $(document).ready(
 
 </header>
 
-	<div id="content" class="inner">
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">
-		
-			learning concept checking the hard way - part 1</a>
-	</h2>
-	<div class="entry-content">
-		<p>What is a concept in C++?</p>
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">learning concept checking the hard way - part 1</h2>
+	<div class="entry-content"><p>What is a concept in C++?</p>
 
 <blockquote><p>A concept is a set of requirements (valid expressions, associated types, semantic invariants, complexity guarantees, etc.)
 that a type must fulfill to be correctly used as arguments in a call to a generic algorithm</p></blockquote>
@@ -261,10 +252,7 @@ checking. It involves some really cool template tricks and C++ trivia.</p>
 <li><a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm">http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm</a></li>
 </ol>
 
-
-		
-		
-	</div>
+</div>
 
 
 <div class="meta">
@@ -291,224 +279,41 @@ checking. It involves some really cool template tricks and C++ trivia.</p>
 	
 </div></article>
 
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/03/15/the-star-in-ruby/">
-		
-			star in ruby</a>
-	</h2>
-	<div class="entry-content">
-		<p>I have seen the Ruby&rsquo;s <code>*</code> operator used at several places in different
-ways and often times I get confused the way it is used. Finally I decided to learn more about it and here are few interesting roles of <code>*</code> operator that I found in Ruby.
-It can be used to multiply, repeat, copy or as a splat operator.</p>
-
-<hr />
-
-<h3>Multiplication</h3>
-
-<p>This is the most obvious role of <code>*</code>. It&rsquo;s the multiplication operator. <code>2 * 2 = 4</code></p>
-
-<p>Or an instance method of <strong>Fixnum</strong> class to perform multiplication. <code>2.*(2) = 4</code></p>
-
-
-		
-		<a href="/blog/2014/03/15/the-star-in-ruby/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-15T00:11:00-05:00" pubdate data-updated="true">Mar 15<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/code/'>Code</a>, <a class='category' href='/blog/categories/programming/'>Programming,</a>, <a class='category' href='/blog/categories/ruby/'>Ruby,</a>
-
-
-</div>
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
 	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/07/24/elasticsearch-basics/">
-		
-			elasticsearch basics - Analyzers</a>
-	</h2>
-	<div class="entry-content">
-		<p>Elasticsearch is a powerful open source search engine build over Apache
-Lucene. You can do all kind of customized searches on huge amount of
-data by creating customized indexes. This post gives an overview of
-Analysis module of elasticsearch.</p>
-
-<p>Analyzers basically helps you in analyzing your data.<code>:o</code> You need to analyze data while creating indexes and while searching. You could analyze your analyzers using <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze.html">Analyze Api</a> provided by elasticsearch.</p>
-
-<p>Creating indexes mainly involves three steps:</p>
-
-<ul>
-<li><strong>Pre-processing of raw text</strong> using <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/mapping-charfilter/">char filters </a>. This may be used to strip html tags, or you may define your custom mapping.  (<em>Couldn&rsquo;t find a way to test this using analyse api. Please put it in comments if you know some way to test these through Analyze Api</em>)</li>
-</ul>
-
-
-<p>Example: You could use a <strong>char-filter</strong> of type <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/htmlstrip-charfilter/"><code>html_strip</code></a> to strip out html tags.</p>
-
-<p>A text like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;p&gt;</span> Learn Something New Today! which is <span class="nt">&lt;b&gt;</span>always<span class="nt">&lt;/b&gt;</span> fun <span class="nt">&lt;/p&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>would get converted to:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>Learn Something New Today! which is always fun
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-		
-		<a href="/blog/2013/07/24/elasticsearch-basics/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-24T14:18:00-05:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/analyzers/'>analyzers</a>, <a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/tutorials/'>tutorials</a>
-
-
-</div>
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
 	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/07/23/modularize-sinatra/">
-		
-			modularize_sinatra - modular sinatra app generator</a>
-	</h2>
-	<div class="entry-content">
-		<p><a href="http://github.com/sinatra/sinatra"><strong>Sinatra</strong></a> is simple, small and fast.</p>
-
-<blockquote><p>Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort. <strong> &ndash; sinatra readme</strong></p></blockquote>
-
-<p>The only downside is that it doesn&rsquo;t offer you the typical <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">&ldquo;MVC&rdquo;</a> like <a href="http://github.com/rails/rails"><strong>Rails</strong></a>.</p>
-
-<p>Lot of times Rails is an overkill for a simple application and Sinatra seems like a perfect choice. Since using Sinatra, you could write all your code in a single file, and at one time it becomes really hard to manage the code and you may feel the need of porting it to a framework like Rails. However, you don&rsquo;t need all the features that comes with Rails. What you need here is some kind of modularization in your application. For this very purpose I created a gem called <a href="http://github.com/goyalankit/modularize_sinatra">modularize_sinatra</a></p>
-
-<blockquote><p><strong>modularize_sinatra</strong> creates a <em>Rails like</em> MVC structure without the overhead.</p></blockquote>
-
-<p><a href="https://rubygems.org/gems/modularize_sinatra"><code>modularize_sinatra</code></a> is available on rubygems. For installation and usage instructions please visit <a href="http://github.com/goyalankit/modularize_sinatra">http://github.com/goyalankit/modularize_sinatra</a></p>
-
-
-		
-		<a href="/blog/2013/07/23/modularize-sinatra/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-23T21:41:00-05:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/gem/'>gem</a>, <a class='category' href='/blog/categories/labs/'>labs</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/sinatra/'>sinatra</a>
-
-
-</div>
 	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/07/23/initial-commit/">
-		
-			Initial commit</a>
-	</h2>
-	<div class="entry-content">
-		<p><img src="http://25.media.tumblr.com/9bf68d40dd695984b5331280dfe2cb99/tumblr_mft9ey6vlg1rzwhuvo1_400.png"></p>
-
-<p>This is my first post. Through this blog, I hope to share technical, non-technical, all kind of stuff that I discover and/or create.</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-23T15:23:00-05:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/hello/'>hello</a>
-
-
-</div>
+	<a class="addthis_button_tweet"></a>
 	
-</div></article>
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+<!---	<a class="addthis_counter addthis_pill_style"></a> --->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
 
 <nav id="pagenavi">
-    
-    
-    <div class="center"><a href="/archives">Blog Archives</a></div>
-</nav></div>
+  <p class="meta">
+  
+  <a class="prev nohover" id="nohover" href="/blog/2014/03/15/the-star-in-ruby/" title="Previous Post: star in ruby">&laquo; star in ruby</a>
+  
+  
+  </p>
+</nav>
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+</div>
 	<footer id="footer" class="inner">Copyright &copy; 2014
 
     Ankit Goyal
@@ -529,7 +334,10 @@ Powered by Octopress.
       var disqus_shortname = 'goyalankit';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1/';
+        var disqus_url = 'http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
