@@ -15,12 +15,12 @@ that a type must fulfill to be correctly used as arguments in a call to a generi
 For example if you write your own generic implementation for
 `BinarySearchTree`. It should basically work for any type for which `<`
 operator is defined. As long as you have that condition satisfied you
-can build a binary tree for that type. For instance, `<` is defined for
+can build a binary search tree for that type. For instance, `<` is defined for
 `int`, `double`. However it's not defined for `complex` numbers. C++ has
 no explicit mechanism for representing concepts.
 
-consider the following trivial example of a possible way 
-you may write your generic Binary Tree.
+Consider the following possible way 
+you may write your generic Binary Search Tree.
 
 ```c++
 #include<iostream>
@@ -78,7 +78,7 @@ numbers you will get a compile time error. So the question is how do you
 check if a class has a certain method defined or not. Above Example is a
 trivial example to show you the use case, the error could be buried deep 
 into your code and may not represent the actual reason for
-failue. Boost documentation gives a [ good example ]( http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm ).
+failure. Boost documentation gives a [ good example ]( http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm ).
 
 In short it would be good to have a `has_less` method for a generic type 
 that determines if the given type has a `<` method defined or not. Using
@@ -102,7 +102,8 @@ checking. It involves some really cool template tricks and C++ trivia.
 
 Feel free to comment and give suggestions.
 
-References/Further Reading:
+References:
+
 1. http://www.boost.org/doc/libs/1_55_0/libs/concept_check/concept_check.htm
 
 
