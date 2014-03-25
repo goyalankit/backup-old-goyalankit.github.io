@@ -10,15 +10,15 @@ In the [previous post](blog/2014/03/21/learning-concept-checking-the-hard-way-1/
 checking. In this post we'll step by step see how concept checking
 works.
 
-As an example, we'll write a `has_less` method, which for any
+Our final goal is to write a `has_less` method, which for any
 given type will return true or false based on whether `<` is defined for
-that type or not.
-
+that type or not at the **compile time**
 
 Let's first look at some of the c++ concepts which we'll use in the
 process.
 
 ### 1. decltype
+(since c++11)
 
 `decltype` let's you extract type from any expression. It's available in
 C++11
@@ -49,7 +49,68 @@ Mytype: constructor called.
 
 **Takeaway**: we can use **decltype** to get type of a variable.
 
-### 2. Template specialization
+### 2. declval
+(since c++11)
+
+`declval` creates a default constructed type of its argument for use in type checking. It never returns a value. 
+It is usually used with `decltype` to determine the type of an
+expression. It doesn't
+require constructor of the types to exist or match. Line 14 won't
+compile because there is no matching constructor.
+
+Note that the compilation error occurs because `NonDefault` type doesn't
+have a "default" constructor. If you uncomment the line number 6, the compilation error on line 14 will go away since now compiler will find a matching constructor.
+
+
+Example, taken from [cpp reference](http://naipc.uchicago.edu/2014/ref/cppreference/en/cpp/utility/declval.html)
+```cpp
+struct Default {
+    int foo() const {return 1;}
+};
+ 
+struct NonDefault {
+//    NonDefault(){}
+    NonDefault(const NonDefault&) {}
+    int foo() const {return 1;}
+};
+ 
+int main()
+{
+    decltype(Default().foo()) n1 = 1; // int n1
+//  decltype(NonDefault().foo()) n2 = n1; // will not compile
+    decltype(std::declval<NonDefault>().foo()) n2 = n1; // int n2
+    std::cout << "n2 = " << n2 << '\n';
+}
+```
+
+### 3. constexpr 
+(since c++11)
+
+`constexpr` gives you a constant at the compile time instead of runtime
+constant that you get using `const` keyword.
+
+```cpp
+constexpr int CreateConstant (int a, int b) { return a * b; }
+const int arraySize = CreateConstant(2,3);
+```
+
+`arraySize` will be calculated at the compile time here.
+
+### 4. static_assert
+(since c++11)
+
+Performs compile-time assertion checking
+```cpp
+//will give you a compile time assertion failure error. 
+int main(int argc, const char * argv[])
+{
+    static_assert(1==2, "Assertion failed.");
+    return 0;
+}
+```
+
+
+### 5. Template specialization
 
 Templates in c++ are turing complete and you can do lot of cool stuff
 with them. Some trivia about templates:
@@ -125,12 +186,8 @@ int main(int argc, const char * argv[]){
 }
 >> ./a.out
 non-variadic method.
-
 ```
+
 ---
 
-Now let's start building our `has_less` method to identify if certain
-method exists for a certain type.
-
-
-
+That's all we need and in the next post we'll write our `has_less` method.
