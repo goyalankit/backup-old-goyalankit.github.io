@@ -3,7 +3,7 @@ layout: post
 title: "learning concept checking the hard way - part 2"
 date: 2014-03-24 18:38
 comments: true
-categories: 
+categories: code programming cpp templates concept-checking
 ---
 
 In the [previous post](http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/), I talked about importance/use case of concept
