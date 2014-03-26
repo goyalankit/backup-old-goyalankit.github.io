@@ -97,7 +97,7 @@ BOOST_CLASS_REQUIRE(T, boost, LessThanComparableConcept);
 
 For more info: visit http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm
 
-In the next post, we'll implement our own short version of concept
+In the [next post](http://goyalankit.com/blog/2014/03/24/learning-concept-checking-the-hard-way-2/), we'll implement our own short version of concept
 checking. It involves some really cool template tricks and C++ trivia.
 
 Feel free to comment and give suggestions.
