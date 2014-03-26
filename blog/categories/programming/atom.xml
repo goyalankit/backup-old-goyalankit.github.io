@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-25T19:11:58-05:00</updated>
+  <updated>2014-03-25T19:15:06-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -12,6 +12,248 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[learning concept checking the hard way - part 2]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2/"/>
+    <updated>2014-03-24T18:38:00-05:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2</id>
+    <content type="html"><![CDATA[<p>In the <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">previous post</a>, I talked about importance/use case of concept
+checking. In this post we&rsquo;ll step by step see how concept checking
+works.</p>
+
+<p>Our final goal is to write a <code>has_less</code> method, which for any
+given type will return true or false based on whether <code>&lt;</code> is defined for
+that type or not at the <strong>compile time</strong></p>
+
+<p>Let&rsquo;s first look at some of the c++ concepts which we&rsquo;ll use in the
+process.</p>
+
+<h3>1. decltype</h3>
+
+<p>(since c++11)</p>
+
+<p><code>decltype</code> let&rsquo;s you extract type from any expression. It&rsquo;s available in
+C++11</p>
+
+<p>For example, In the example below, decltype can be used to get the type
+of variable <code>myType1</code> and used to define another variable with the same
+type.</p>
+
+<p>```cpp
+//dec.cpp file
+class MyType{
+public:</p>
+
+<pre><code>MyType(){std::cout &lt;&lt; "Mytype: constructor called." &lt;&lt; std::endl; }
+</code></pre>
+
+<p>};</p>
+
+<p>int main(int argc, const char * argv[])
+{</p>
+
+<pre><code>MyType myType1;
+decltype(myType1) myType2;
+return 0;
+</code></pre>
+
+<p>}</p>
+
+<blockquote><blockquote><p>./a.out
+Mytype: constructor called.
+Mytype: constructor called.</p></blockquote></blockquote>
+
+<p>```</p>
+
+<p><strong>Takeaway</strong>: we can use <strong>decltype</strong> to get type of a variable.</p>
+
+<h3>2. declval</h3>
+
+<p>(since c++11)</p>
+
+<p><code>declval</code> creates a default constructed type of its argument for use in type checking. It never returns a value.
+It is usually used with <code>decltype</code> to determine the type of an
+expression. It doesn&rsquo;t
+require constructor of the types to exist or match. Line 14 won&rsquo;t
+compile because there is no matching constructor.</p>
+
+<p>Note that the compilation error occurs because <code>NonDefault</code> type doesn&rsquo;t
+have a &ldquo;default&rdquo; constructor. If you uncomment the line number 6, the compilation error on line 14 will go away since now compiler will find a matching constructor.</p>
+
+<p>Example, taken from <a href="http://naipc.uchicago.edu/2014/ref/cppreference/en/cpp/utility/declval.html">cpp reference</a>
+```cpp
+struct Default {</p>
+
+<pre><code>int foo() const {return 1;}
+</code></pre>
+
+<p>};</p>
+
+<p>struct NonDefault {
+//    NonDefault(){}</p>
+
+<pre><code>NonDefault(const NonDefault&amp;) {}
+int foo() const {return 1;}
+</code></pre>
+
+<p>};</p>
+
+<p>int main()
+{</p>
+
+<pre><code>decltype(Default().foo()) n1 = 1; // int n1
+</code></pre>
+
+<p>//  decltype(NonDefault().foo()) n2 = n1; // will not compile</p>
+
+<pre><code>decltype(std::declval&lt;NonDefault&gt;().foo()) n2 = n1; // int n2
+std::cout &lt;&lt; "n2 = " &lt;&lt; n2 &lt;&lt; '\n';
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>3. constexpr</h3>
+
+<p>(since c++11)</p>
+
+<p><code>constexpr</code> gives you a constant at the compile time instead of runtime
+constant that you get using <code>const</code> keyword.</p>
+
+<p><code>cpp
+constexpr int CreateConstant (int a, int b) { return a * b; }
+const int arraySize = CreateConstant(2,3);
+</code></p>
+
+<p><code>arraySize</code> will be calculated at the compile time here.</p>
+
+<h3>4. static_assert</h3>
+
+<p>(since c++11)</p>
+
+<p>Performs compile-time assertion checking
+```cpp
+//will give you a compile time assertion failure error.
+int main(int argc, const char * argv[])
+{</p>
+
+<pre><code>static_assert(1==2, "Assertion failed.");
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>5. Template specialization</h3>
+
+<p>Templates in c++ are turing complete and you can do lot of cool stuff
+with them. Some trivia about templates:</p>
+
+<ul>
+<li><p><strong>Templates are instantiated at compile time and only if they are used
+ somewhere in a program.</strong> However they are checked for syntax.</p>
+
+<p> Consider the example below, where we have a generic template method(<code>hello(T a)</code>) that
+ calls a method(<code>iDontExist</code>) that is not defined anywhere. However the code
+ compiles successfully since we are not calling that method.</p>
+
+<p> Note the specialization of the template for int type. When compiler
+ has more than one functions with the same name, it looks at the type
+ and select the best match. In case of <code>hello&lt;int&gt;(2)</code>, it selects the
+ specialized template over generic so, it instantiates only the
+ specialized template which is both syntactically and semantically correct.</p></li>
+</ul>
+
+
+<p>```cpp</p>
+
+<p>// This is a valid code and will compile just fine
+template <typename T>
+void hello(typename T::foo a){</p>
+
+<pre><code>int b = T::iDontExist(12); //iDontExist doesn't exist.
+std::cout &lt;&lt; a &lt;&lt; std::endl;
+</code></pre>
+
+<p>}</p>
+
+<p>// Another possible candidate.
+template <typename T>
+void hello(T a){</p>
+
+<pre><code>std::cout &lt;&lt; a &lt;&lt; std::endl;
+</code></pre>
+
+<p>}</p>
+
+<p>int main(int argc, const char * argv[]){</p>
+
+<pre><code>hello&lt;int&gt;(2);
+return 0;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<ul>
+<li><strong>Substitution failure is not an error (SFINAE)</strong></li>
+</ul>
+
+
+<p>Note in the above program, when <code>hello&lt;int&gt;</code> is called compiler first
+tries to match it with the <code>void hello(typename T::foo a)</code>, however <code>int</code> doesn&rsquo;t have a nested type <code>int::foo</code>.
+This is called a substitution failure, compiler failed to substitute
+typename T for int.</p>
+
+<p>Compiler doesn&rsquo;t throw a compilation error here; it removes this
+overload from potential candidate and tries to
+find the next possible match. If one or more candidates remain and overload resolution succeeds,
+the invocation is well-formed. Check out more about SFINANE on <a href="http://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error">wikipedia</a></p>
+
+<ul>
+<li><strong>Given two possible candidates where one is variadic and other is not.
+Compiler always chooses the non-variadic method.</strong> For example, In the
+example below compiler has two candidates for <code>hello&lt;int&gt;</code>. Compiler
+chooses the non-variadic one.</li>
+</ul>
+
+
+<p>```cpp
+template <typename T>
+// Note the variadic(&hellip;) arguments
+void hello(&hellip;){</p>
+
+<pre><code>std::cout &lt;&lt; "variadic method." &lt;&lt; std::endl;
+</code></pre>
+
+<p>}
+// Another possible candidate.
+template <typename T>
+void hello(T a){</p>
+
+<pre><code>std::cout &lt;&lt; "non-variadic method." &lt;&lt; std::endl;
+</code></pre>
+
+<p>}
+int main(int argc, const char * argv[]){</p>
+
+<pre><code>hello&lt;int&gt;(2);
+return 0;
+</code></pre>
+
+<p>}</p>
+
+<blockquote><blockquote><p>./a.out
+non-variadic method.
+```</p></blockquote></blockquote>
+
+<hr />
+
+<p>That&rsquo;s all we need and in the next post we&rsquo;ll write our <code>has_less</code> method.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 1]]></title>
