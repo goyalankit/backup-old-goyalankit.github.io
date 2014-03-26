@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-25T19:15:06-05:00</updated>
+  <updated>2014-03-25T20:15:16-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -12,6 +12,188 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[learning concept checking the hard way - part 3]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3/"/>
+    <updated>2014-03-25T19:19:00-05:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3</id>
+    <content type="html"><![CDATA[<p>In the previous posts <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">this</a> and <a href="http://goyalankit.com/blog/2014/03/24/learning-concept-checking-the-hard-way-2/">this</a>, I talked about the basics of
+concept checking and stuff you need to know.</p>
+
+<p>Finally here&rsquo;s our <code>has_less</code> method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;vector&gt;</span>
+</span><span class='line'><span class="cp">#import &lt;complex&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="k">typename</span> <span class="n">unused</span> <span class="o">=</span> <span class="n">decltype</span><span class="p">(</span><span class="n">T</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">())</span><span class="o">&gt;</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">true_type</span> <span class="n">has_less_helper</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">false_type</span> <span class="n">has_less_helper</span><span class="p">(...);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="n">constexpr</span> <span class="kt">bool</span> <span class="n">has_less</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>    <span class="k">using</span> <span class="n">my_type</span> <span class="o">=</span> <span class="n">decltype</span><span class="p">(</span><span class="n">has_less_helper</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()));</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">my_type</span><span class="o">::</span><span class="n">value</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">BinarySearchTree</span><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">static_assert</span><span class="p">(</span><span class="n">has_less</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(),</span> <span class="s">&quot;Assertion failed. No less than operation defined.&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">BinarySearchTree</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">BinarySearchTree</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">binarySearchTree</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">// compile time error here. since complex&lt;int&gt; doesn&#39;t have a &#39;&lt;&#39; operator</span>
+</span><span class='line'>    <span class="n">BinarySearchTree</span><span class="o">&lt;</span><span class="n">complex</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">compBinarySearchTree</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s dissect the above method and see what&rsquo;s happening.</p>
+
+<p><code>has_helper</code> method has two possible overload options. For the <code>int</code>
+datatype both are possible overload candidates but as we saw earlier
+compiler prefers the <strong>non-variadi</strong>c option. So it choosses the first
+option which has a return type of <code>std::true_type</code>.</p>
+
+<p>However for <code>complex&lt;int&gt;</code>, compiler has only one option since <code>&lt;</code>
+doesn&rsquo;t exist for <code>complex</code> type.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">// we don&#39;t need to define the methods</span>
+</span><span class='line'><span class="c1">// Since we are not calling them.</span>
+</span><span class='line'><span class="c1">// we are just using the principle of SFINAE that applies to template</span>
+</span><span class='line'><span class="c1">// arguments and not to the body</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="k">typename</span> <span class="n">unused</span> <span class="o">=</span> <span class="n">decltype</span><span class="p">(</span><span class="n">T</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">())</span><span class="o">&gt;</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">true_type</span> <span class="n">has_less_helper</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//and</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">false_type</span> <span class="n">has_less_helper</span><span class="p">(...);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Note:</em> <a href="http://www.cplusplus.com/reference/type_traits/true_type/"><code>true_type</code></a> and <a href="http://www.cplusplus.com/reference/type_traits/true_type/"><code>false_type</code></a> are just structs with values as
+<code>true</code> and <code>false</code> resp. Check out <a href="http://www.cplusplus.com/reference/type_traits/integral_constant/">their usage</a></p>
+
+<p>We could directly use <code>has_less_helper</code> to know what Type has a less
+than operator defined for it. However it is important to note that the
+<code>has_less_helper</code> assumes that type <code>T</code> has a default constructor
+defined for it(<code>decltype(T() &lt; T())</code>).</p>
+
+<p>To remove above dependency we could use declvalue(as discussed in
+previous post). That is what we are
+doing in <code>has_less</code> method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="n">constexpr</span> <span class="kt">bool</span> <span class="n">has_less</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span><span class='line'>    <span class="c1">// using is equivalent to typedef</span>
+</span><span class='line'>    <span class="k">using</span> <span class="n">my_type</span> <span class="o">=</span> <span class="n">decltype</span><span class="p">(</span><span class="n">has_less_helper</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()));</span>
+</span><span class='line'>    <span class="c1">// note that the return type is either true_type or false_type</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">my_type</span><span class="o">::</span><span class="n">value</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Note:</em> the <code>constexpr</code> keyword makes the method evaluate at compile time. So we will have a true or false value from this method at compile time.</p>
+
+<p>Inside our definition of generic <code>BinarySearchTree</code> we put a
+<code>static_assert</code>(compile time assert) to check that we have a less that
+operator define for the type T.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">BinarySearchTree</span><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">static_assert</span><span class="p">(</span><span class="n">has_less</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(),</span> <span class="s">&quot;Assertion failed. No less than operation defined.&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">BinarySearchTree</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it! Now when you declare something like</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">BinarySearchTree</span><span class="o">&lt;</span> <span class="n">complex</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">compBinarySearchTree</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>we get a compile time error.</p>
+
+<p>Awesome! Now you understand the concept of concept checking. Happy
+coding.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 2]]></title>

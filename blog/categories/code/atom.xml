@@ -4,7 +4,7 @@
   <title><![CDATA[Category: code | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/code/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-25T19:15:06-05:00</updated>
+  <updated>2014-03-25T20:15:16-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -12,6 +12,145 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[learning concept checking the hard way - part 3]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3/"/>
+    <updated>2014-03-25T19:19:00-05:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3</id>
+    <content type="html"><![CDATA[<p>In the previous posts <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">this</a> and <a href="http://goyalankit.com/blog/2014/03/24/learning-concept-checking-the-hard-way-2/">this</a>, I talked about the basics of
+concept checking and stuff you need to know.</p>
+
+<p>Finally here&rsquo;s our <code>has_less</code> method.</p>
+
+<p>```cpp</p>
+
+<h1>include <iostream></h1>
+
+<h1>include <vector></h1>
+
+<h1>import <complex></h1>
+
+<p>using namespace std;</p>
+
+<p>template <typename T, typename unused = decltype(T() < T())>
+std::true_type has_less_helper(const T&amp;);</p>
+
+<p>template <typename T>
+std::false_type has_less_helper(&hellip;);</p>
+
+<p>template <typename T>
+constexpr bool has_less(void){</p>
+
+<pre><code>using my_type = decltype(has_less_helper&lt;T&gt;(std::declval&lt;T&gt;()));
+return my_type::value;
+</code></pre>
+
+<p>}</p>
+
+<p>template <typename T>
+class BinarySearchTree{
+public:</p>
+
+<pre><code>static_assert(has_less&lt;T&gt;(), "Assertion failed. No less than operation defined.");
+BinarySearchTree() {
+}
+</code></pre>
+
+<p>};</p>
+
+<p>int main(int argc, const char * argv[])
+{</p>
+
+<pre><code>BinarySearchTree&lt;int&gt; binarySearchTree;
+// compile time error here. since complex&lt;int&gt; doesn't have a '&lt;' operator
+BinarySearchTree&lt;complex&lt;int&gt;&gt; compBinarySearchTree;
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Let&rsquo;s dissect the above method and see what&rsquo;s happening.</p>
+
+<p><code>has_helper</code> method has two possible overload options. For the <code>int</code>
+datatype both are possible overload candidates but as we saw earlier
+compiler prefers the <strong>non-variadi</strong>c option. So it choosses the first
+option which has a return type of <code>std::true_type</code>.</p>
+
+<p>However for <code>complex&lt;int&gt;</code>, compiler has only one option since <code>&lt;</code>
+doesn&rsquo;t exist for <code>complex</code> type.</p>
+
+<p>```cpp
+// we don&rsquo;t need to define the methods
+// Since we are not calling them.
+// we are just using the principle of SFINAE that applies to template
+// arguments and not to the body</p>
+
+<p>template <typename T, typename unused = decltype(T() < T())>
+std::true_type has_less_helper(const T&amp;);</p>
+
+<p>//and</p>
+
+<p>template <typename T>
+std::false_type has_less_helper(&hellip;);
+```</p>
+
+<p><em>Note:</em> <a href="http://www.cplusplus.com/reference/type_traits/true_type/"><code>true_type</code></a> and <a href="http://www.cplusplus.com/reference/type_traits/true_type/"><code>false_type</code></a> are just structs with values as
+<code>true</code> and <code>false</code> resp. Check out <a href="http://www.cplusplus.com/reference/type_traits/integral_constant/">their usage</a></p>
+
+<p>We could directly use <code>has_less_helper</code> to know what Type has a less
+than operator defined for it. However it is important to note that the
+<code>has_less_helper</code> assumes that type <code>T</code> has a default constructor
+defined for it(<code>decltype(T() &lt; T())</code>).</p>
+
+<p>To remove above dependency we could use declvalue(as discussed in
+previous post). That is what we are
+doing in <code>has_less</code> method.</p>
+
+<p>```
+template <typename T>
+constexpr bool has_less(void){</p>
+
+<pre><code>// using is equivalent to typedef
+using my_type = decltype(has_less_helper&lt;T&gt;(std::declval&lt;T&gt;()));
+// note that the return type is either true_type or false_type
+return my_type::value;
+</code></pre>
+
+<p>}
+```</p>
+
+<p><em>Note:</em> the <code>constexpr</code> keyword makes the method evaluate at compile time. So we will have a true or false value from this method at compile time.</p>
+
+<p>Inside our definition of generic <code>BinarySearchTree</code> we put a
+<code>static_assert</code>(compile time assert) to check that we have a less that
+operator define for the type T.</p>
+
+<p>```cpp
+template <typename T>
+class BinarySearchTree{
+public:</p>
+
+<pre><code>static_assert(has_less&lt;T&gt;(), "Assertion failed. No less than operation defined.");
+BinarySearchTree() {
+}
+</code></pre>
+
+<p>};
+```</p>
+
+<p>That&rsquo;s it! Now when you declare something like</p>
+
+<p><code>cpp
+BinarySearchTree&lt; complex&lt;int&gt; &gt; compBinarySearchTree;
+</code>
+we get a compile time error.</p>
+
+<p>Awesome! Now you understand the concept of concept checking. Happy
+coding.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 2]]></title>
