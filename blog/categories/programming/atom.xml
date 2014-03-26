@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-22T01:56:28-05:00</updated>
+  <updated>2014-03-25T19:11:06-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -118,7 +118,7 @@ BOOST_CLASS_REQUIRE(T, boost, LessThanComparableConcept);</p>
 
 <p>For more info: visit <a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm">http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm</a></p>
 
-<p>In the next post, we&rsquo;ll implement our own short version of concept
+<p>In the <a href="http://goyalankit.com/blog/2014/03/24/learning-concept-checking-the-hard-way-2/">next post</a>, we&rsquo;ll implement our own short version of concept
 checking. It involves some really cool template tricks and C++ trivia.</p>
 
 <p>Feel free to comment and give suggestions.</p>

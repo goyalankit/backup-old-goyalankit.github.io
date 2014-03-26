@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-22T01:56:28-05:00</updated>
+  <updated>2014-03-25T19:11:06-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -12,6 +12,281 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[learning concept checking the hard way - part 2]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2/"/>
+    <updated>2014-03-24T18:38:00-05:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2</id>
+    <content type="html"><![CDATA[<p>In the <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">previous post</a>, I talked about importance/use case of concept
+checking. In this post we&rsquo;ll step by step see how concept checking
+works.</p>
+
+<p>Our final goal is to write a <code>has_less</code> method, which for any
+given type will return true or false based on whether <code>&lt;</code> is defined for
+that type or not at the <strong>compile time</strong></p>
+
+<p>Let&rsquo;s first look at some of the c++ concepts which we&rsquo;ll use in the
+process.</p>
+
+<h3>1. decltype</h3>
+
+<p>(since c++11)</p>
+
+<p><code>decltype</code> let&rsquo;s you extract type from any expression. It&rsquo;s available in
+C++11</p>
+
+<p>For example, In the example below, decltype can be used to get the type
+of variable <code>myType1</code> and used to define another variable with the same
+type.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">//dec.cpp file</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">MyType</span><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">MyType</span><span class="p">(){</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Mytype: constructor called.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">MyType</span> <span class="n">myType1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">decltype</span><span class="p">(</span><span class="n">myType1</span><span class="p">)</span> <span class="n">myType2</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span>
+</span><span class='line'><span class="nl">Mytype:</span> <span class="n">constructor</span> <span class="n">called</span><span class="p">.</span>
+</span><span class='line'><span class="nl">Mytype:</span> <span class="n">constructor</span> <span class="n">called</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Takeaway</strong>: we can use <strong>decltype</strong> to get type of a variable.</p>
+
+<h3>2. declval</h3>
+
+<p>(since c++11)</p>
+
+<p><code>declval</code> creates a default constructed type of its argument for use in type checking. It never returns a value.
+It is usually used with <code>decltype</code> to determine the type of an
+expression. It doesn&rsquo;t
+require constructor of the types to exist or match. Line 14 won&rsquo;t
+compile because there is no matching constructor.</p>
+
+<p>Note that the compilation error occurs because <code>NonDefault</code> type doesn&rsquo;t
+have a &ldquo;default&rdquo; constructor. If you uncomment the line number 6, the compilation error on line 14 will go away since now compiler will find a matching constructor.</p>
+
+<p>Example, taken from <a href="http://naipc.uchicago.edu/2014/ref/cppreference/en/cpp/utility/declval.html">cpp reference</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">struct</span> <span class="n">Default</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">foo</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="mi">1</span><span class="p">;}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">struct</span> <span class="n">NonDefault</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">//    NonDefault(){}</span>
+</span><span class='line'>    <span class="n">NonDefault</span><span class="p">(</span><span class="k">const</span> <span class="n">NonDefault</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">foo</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="mi">1</span><span class="p">;}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">decltype</span><span class="p">(</span><span class="n">Default</span><span class="p">().</span><span class="n">foo</span><span class="p">())</span> <span class="n">n1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// int n1</span>
+</span><span class='line'><span class="c1">//  decltype(NonDefault().foo()) n2 = n1; // will not compile</span>
+</span><span class='line'>    <span class="n">decltype</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">NonDefault</span><span class="o">&gt;</span><span class="p">().</span><span class="n">foo</span><span class="p">())</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">n1</span><span class="p">;</span> <span class="c1">// int n2</span>
+</span><span class='line'>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;n2 = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">n2</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3. constexpr</h3>
+
+<p>(since c++11)</p>
+
+<p><code>constexpr</code> gives you a constant at the compile time instead of runtime
+constant that you get using <code>const</code> keyword.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">constexpr</span> <span class="kt">int</span> <span class="n">CreateConstant</span> <span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="k">const</span> <span class="kt">int</span> <span class="n">arraySize</span> <span class="o">=</span> <span class="n">CreateConstant</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>arraySize</code> will be calculated at the compile time here.</p>
+
+<h3>4. static_assert</h3>
+
+<p>(since c++11)</p>
+
+<p>Performs compile-time assertion checking</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">//will give you a compile time assertion failure error. </span>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">static_assert</span><span class="p">(</span><span class="mi">1</span><span class="o">==</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;Assertion failed.&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>5. Template specialization</h3>
+
+<p>Templates in c++ are turing complete and you can do lot of cool stuff
+with them. Some trivia about templates:</p>
+
+<ul>
+<li><p><strong>Templates are instantiated at compile time and only if they are used
+ somewhere in a program.</strong> However they are checked for syntax.</p>
+
+<p> Consider the example below, where we have a generic template method(<code>hello(T a)</code>) that
+ calls a method(<code>iDontExist</code>) that is not defined anywhere. However the code
+ compiles successfully since we are not calling that method.</p>
+
+<p> Note the specialization of the template for int type. When compiler
+ has more than one functions with the same name, it looks at the type
+ and select the best match. In case of <code>hello&lt;int&gt;(2)</code>, it selects the
+ specialized template over generic so, it instantiates only the
+ specialized template which is both syntactically and semantically correct.</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">// This is a valid code and will compile just fine</span>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">hello</span><span class="p">(</span><span class="k">typename</span> <span class="n">T</span><span class="o">::</span><span class="n">foo</span> <span class="n">a</span><span class="p">){</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">T</span><span class="o">::</span><span class="n">iDontExist</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span> <span class="c1">//iDontExist doesn&#39;t exist.</span>
+</span><span class='line'>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Another possible candidate.</span>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">hello</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
+</span><span class='line'>    <span class="n">hello</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><strong>Substitution failure is not an error (SFINAE)</strong></li>
+</ul>
+
+
+<p>Note in the above program, when <code>hello&lt;int&gt;</code> is called compiler first
+tries to match it with the <code>void hello(typename T::foo a)</code>, however <code>int</code> doesn&rsquo;t have a nested type <code>int::foo</code>.
+This is called a substitution failure, compiler failed to substitute
+typename T for int.</p>
+
+<p>Compiler doesn&rsquo;t throw a compilation error here; it removes this
+overload from potential candidate and tries to
+find the next possible match. If one or more candidates remain and overload resolution succeeds,
+the invocation is well-formed. Check out more about SFINANE on <a href="http://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error">wikipedia</a></p>
+
+<ul>
+<li><strong>Given two possible candidates where one is variadic and other is not.
+Compiler always chooses the non-variadic method.</strong> For example, In the
+example below compiler has two candidates for <code>hello&lt;int&gt;</code>. Compiler
+chooses the non-variadic one.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="c1">// Note the variadic(...) arguments</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">hello</span><span class="p">(...){</span>
+</span><span class='line'>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;variadic method.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// Another possible candidate.</span>
+</span><span class='line'><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">hello</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">){</span>
+</span><span class='line'>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;non-variadic method.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]){</span>
+</span><span class='line'>    <span class="n">hello</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span>
+</span><span class='line'><span class="n">non</span><span class="o">-</span><span class="n">variadic</span> <span class="n">method</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>That&rsquo;s all we need and in the next post we&rsquo;ll write our <code>has_less</code> method.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 1]]></title>
@@ -148,7 +423,7 @@ need to do something like this:</p>
 
 <p>For more info: visit <a href="http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm">http://www.boost.org/doc/libs/1_55_0/libs/concept_check/using_concept_check.htm</a></p>
 
-<p>In the next post, we&rsquo;ll implement our own short version of concept
+<p>In the <a href="http://goyalankit.com/blog/2014/03/24/learning-concept-checking-the-hard-way-2/">next post</a>, we&rsquo;ll implement our own short version of concept
 checking. It involves some really cool template tricks and C++ trivia.</p>
 
 <p>Feel free to comment and give suggestions.</p>
