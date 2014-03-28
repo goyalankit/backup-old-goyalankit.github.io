@@ -5,11 +5,14 @@
 	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
 	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<meta charset="utf-8">
-	<title>Blog Archives  | /home/ankit</title>
+	<title>compile and run cpp program from vim  | /home/ankit</title>
 
 <meta name="author" content="Ankit Goyal"> 
 
-<meta name="description" content="2014 compile and run cpp program from vim Mar 27 snippet, tip, vim learning concept checking the hard way - part 3 Mar 25 code, concept-checking, &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="To compile and run cpp program from MVIM(or VIM) directly. Add this to
+your ~/.vimrc 1
+2
+nnoremap &lt;C-c&gt; :!g++ -o %:r.out % -std=c++11&lt;Enter& &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -109,160 +112,96 @@ $(document).ready(
 
 </header>
 
-	<div id="content" class="inner">
-	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">compile and run cpp program from vim</h2>
+	<div class="entry-content"><p>To compile and run cpp program from <code>MVIM</code>(or VIM) directly. Add this to
+your ~/.vimrc</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="nb">nnoremap</span> <span class="p">&lt;</span>C<span class="p">-</span><span class="k">c</span><span class="p">&gt;</span> :<span class="p">!</span><span class="k">g</span><span class="p">++</span> <span class="p">-</span><span class="k">o</span>  %:<span class="k">r</span>.out % <span class="p">-</span>std<span class="p">=</span><span class="k">c</span><span class="p">++</span><span class="m">11</span><span class="p">&lt;</span>Enter<span class="p">&gt;</span>
+</span><span class='line'><span class="nb">nnoremap</span> <span class="p">&lt;</span>C<span class="p">-</span><span class="k">x</span><span class="p">&gt;</span> :<span class="p">!</span>./%:<span class="k">r</span>.out
+</span></code></pre></td></tr></table></div></figure>
 
 
-	
-	
-	<section class="archives"><h1 class="year">2014</h1>
+<p>Note: You can <strong>remove/add</strong> the <code>&lt;Enter&gt;</code> if you prefer to press <code>&lt;Enter&gt;</code> yourself.</p>
 
-<article>
-	<h2 class="title"><a href="/blog/2014/03/27/compile-and-run-cpp-program-from-vim/">compile and run cpp program from vim</a></h2>
-	<div class="meta">
-		<span class="date">Mar 27</span>
-		<span class="tags">
+<p>Now simply hit <code>Ctrl + c</code> to compile and <code>Ctrl + x</code> to execute.</p>
+
+<p>For a source file with name <code>main.cpp</code>, commands will be expanded to</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>g++ -o main.out main.cpp -std<span class="o">=</span>c++11
+</span><span class='line'>./main.out
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>%:r</code> gets the current filename without the extension whereas <code>%</code>
+gets the current filename.</p>
+
+<p>You can very easily extend above approach to compile using <strong>makefile</strong>.</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-27T22:07:00-05:00" pubdate data-updated="true">Mar 27<span>th</span>, 2014</time></div>
+	<div class="tags">
 
 
 	<a class='category' href='/blog/categories/snippet/'>snippet</a>, <a class='category' href='/blog/categories/tip/'>tip</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
 
 
-</span>
-	    
+</div>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+<!---	<a class="addthis_counter addthis_pill_style"></a> --->
 	</div>
-</article>
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2014/03/25/learning-concept-checking-the-hard-way-3/">learning concept checking the hard way - part 3</a></h2>
-	<div class="meta">
-		<span class="date">Mar 25</span>
-		<span class="tags">
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
 
 
-	<a class='category' href='/blog/categories/code/'>code</a>, <a class='category' href='/blog/categories/concept-checking/'>concept-checking</a>, <a class='category' href='/blog/categories/cpp/'>cpp</a>, <a class='category' href='/blog/categories/programming/'>programming</a>, <a class='category' href='/blog/categories/templates/'>templates</a>
+
+<nav id="pagenavi">
+  <p class="meta">
+  
+  <a class="prev nohover" id="nohover" href="/blog/2014/03/25/learning-concept-checking-the-hard-way-3/" title="Previous Post: learning concept checking the hard way - part 3">&laquo; learning concept checking the hard way - part 3</a>
+  
+  
+  </p>
+</nav>
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 
 
-</span>
-	    
-	</div>
-</article>
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2014/03/24/learning-concept-checking-the-hard-way-2/">learning concept checking the hard way - part 2</a></h2>
-	<div class="meta">
-		<span class="date">Mar 24</span>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/code/'>code</a>, <a class='category' href='/blog/categories/concept-checking/'>concept-checking</a>, <a class='category' href='/blog/categories/cpp/'>cpp</a>, <a class='category' href='/blog/categories/programming/'>programming</a>, <a class='category' href='/blog/categories/templates/'>templates</a>
-
-
-</span>
-	    
-	</div>
-</article>
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">learning concept checking the hard way - part 1</a></h2>
-	<div class="meta">
-		<span class="date">Mar 21</span>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/code/'>code</a>, <a class='category' href='/blog/categories/concept-checking/'>concept-checking</a>, <a class='category' href='/blog/categories/cpp/'>cpp</a>, <a class='category' href='/blog/categories/programming/'>programming</a>, <a class='category' href='/blog/categories/templates/'>templates</a>
-
-
-</span>
-	    
-	</div>
-</article>
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2014/03/15/the-star-in-ruby/">star in ruby</a></h2>
-	<div class="meta">
-		<span class="date">Mar 15</span>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/code/'>Code</a>, <a class='category' href='/blog/categories/programming/'>Programming,</a>, <a class='category' href='/blog/categories/ruby/'>Ruby,</a>
-
-
-</span>
-	    
-	</div>
-</article>
-
-	
-
-
-	
-	
-		</section>
-	
-	<section class="archives"><h1 class="year">2013</h1>
-
-<article>
-	<h2 class="title"><a href="/blog/2013/07/24/elasticsearch-basics/">elasticsearch basics - Analyzers</a></h2>
-	<div class="meta">
-		<span class="date">Jul 24</span>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/analyzers/'>analyzers</a>, <a class='category' href='/blog/categories/elasticsearch/'>elasticsearch</a>, <a class='category' href='/blog/categories/tutorials/'>tutorials</a>
-
-
-</span>
-	    
-	</div>
-</article>
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2013/07/23/modularize-sinatra/">modularize_sinatra - modular sinatra app generator</a></h2>
-	<div class="meta">
-		<span class="date">Jul 23</span>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/gem/'>gem</a>, <a class='category' href='/blog/categories/labs/'>labs</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/sinatra/'>sinatra</a>
-
-
-</span>
-	    
-	</div>
-</article>
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2013/07/23/initial-commit/">Initial commit</a></h2>
-	<div class="meta">
-		<span class="date">Jul 23</span>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/hello/'>hello</a>
-
-
-</span>
-	    
-	</div>
-</article>
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2014
 
@@ -284,7 +223,10 @@ Powered by Octopress.
       var disqus_shortname = 'goyalankit';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim/';
+        var disqus_url = 'http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
