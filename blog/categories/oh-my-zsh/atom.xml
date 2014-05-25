@@ -4,7 +4,7 @@
   <title><![CDATA[Category: oh-my-zsh | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/oh-my-zsh/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-05-24T19:50:07-07:00</updated>
+  <updated>2014-05-24T19:51:14-07:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -24,7 +24,7 @@
 
 <h6>#</h6>
 
-<h1>= This script transfers zsh history to bash history</h1>
+<h1>= This script transfers bash history to zsh history</h1>
 
 <h1>= Change bash and zsh history files, if you don&rsquo;t use defaults</h1>
 

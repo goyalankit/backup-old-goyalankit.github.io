@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-05-24T19:50:07-07:00</updated>
+  <updated>2014-05-24T19:51:14-07:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -52,7 +52,7 @@
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
 </pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#################################################################</span>
-</span><span class='line'><span class="c1"># = This script transfers zsh history to bash history</span>
+</span><span class='line'><span class="c1"># = This script transfers bash history to zsh history</span>
 </span><span class='line'><span class="c1"># = Change bash and zsh history files, if you don&#39;t use defaults</span>
 </span><span class='line'><span class="c1">#</span>
 </span><span class='line'><span class="c1"># = Usage: ruby bash_to_zsh_history.rb</span>
