@@ -10,7 +10,7 @@ Import bash history to zsh history. [Gist Link](https://gist.github.com/goyalank
 
 ```rb
 #################################################################
-# = This script transfers zsh history to bash history
+# = This script transfers bash history to zsh history
 # = Change bash and zsh history files, if you don't use defaults
 #
 # = Usage: ruby bash_to_zsh_history.rb
