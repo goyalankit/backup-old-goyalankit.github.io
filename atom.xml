@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-05-24T19:51:14-07:00</updated>
+  <updated>2014-05-24T19:53:20-07:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -84,19 +84,6 @@
 </span><span class='line'><span class="n">zsh_hist_file</span><span class="o">.</span><span class="n">close</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[writing an LLVM MachineFunctionPass]]></title>
-    <link href="http://goyalankit.github.io/blog/2014/04/01/writing-an-llvm-machinefunctionpass/"/>
-    <updated>2014-04-01T00:18:00-07:00</updated>
-    <id>http://goyalankit.github.io/blog/2014/04/01/writing-an-llvm-machinefunctionpass</id>
-    <content type="html"><![CDATA[<p>Recently I have been working a lot with LLVM. I wanted to write a
-<a href="http://llvm.org/docs/WritingAnLLVMPass.html#the-machinefunctionpass-class">MachineFunctionPass</a>, but I couldn&rsquo;t find a good documentation to do that. LLVM has a pretty good <a href="http://llvm.org/docs/WritingAnLLVMPass.html">tutorial</a> on how to write a
-general purpose pass. However MachineFunctionPass is a <strong>code
-generator</strong>
-pass which are not registered and initialized like a normal pass.</p>
 ]]></content>
   </entry>
   
