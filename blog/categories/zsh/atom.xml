@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: snippet | /home/ankit]]></title>
-  <link href="http://goyalankit.github.io/blog/categories/snippet/atom.xml" rel="self"/>
+  <title><![CDATA[Category: zsh | /home/ankit]]></title>
+  <link href="http://goyalankit.github.io/blog/categories/zsh/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
   <updated>2014-05-24T19:50:07-07:00</updated>
   <id>http://goyalankit.github.io/</id>
@@ -67,36 +67,6 @@ end</p>
 
 <p>zsh_hist_file.close
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[compile and run cpp program from vim]]></title>
-    <link href="http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim/"/>
-    <updated>2014-03-27T22:07:00-07:00</updated>
-    <id>http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim</id>
-    <content type="html"><![CDATA[<p>To compile and run cpp program from <code>MVIM</code>(or VIM) directly. Add this to
-your ~/.vimrc</p>
-
-<p><code>vim
-nnoremap &lt;C-c&gt; :!g++ -o  %:r.out % -std=c++11&lt;Enter&gt;
-nnoremap &lt;C-x&gt; :!./%:r.out
-</code>
-Note: You can <strong>remove/add</strong> the <code>&lt;Enter&gt;</code> if you prefer to press <code>&lt;Enter&gt;</code> yourself.</p>
-
-<p>Now simply hit<code>Ctrl + c</code> to compile and <code>Ctrl + x</code> to execute.</p>
-
-<p>For a source file with name <code>main.cpp</code>, commands will be expanded to
-```sh
-g++ -o main.out main.cpp -std=c++11
-./main.out</p>
-
-<p>```</p>
-
-<p>The <code>%:r</code> gets the current filename without the extension whereas <code>%</code>
-gets the current filename.</p>
-
-<p>You can very easily extend above approach to compile using <strong>makefile</strong>.</p>
 ]]></content>
   </entry>
   

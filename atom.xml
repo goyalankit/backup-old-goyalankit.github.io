@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-27T22:21:19-05:00</updated>
+  <updated>2014-05-24T19:50:07-07:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -14,9 +14,96 @@
 
   
   <entry>
+    <title type="html"><![CDATA[import bash history to zsh history]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/05/24/bash-to-zsh-history/"/>
+    <updated>2014-05-24T19:35:00-07:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/05/24/bash-to-zsh-history</id>
+    <content type="html"><![CDATA[<p>Import bash history to zsh history. <a href="https://gist.github.com/goyalankit/a1c88bfc69107f93cda1">Gist Link</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#################################################################</span>
+</span><span class='line'><span class="c1"># = This script transfers zsh history to bash history</span>
+</span><span class='line'><span class="c1"># = Change bash and zsh history files, if you don&#39;t use defaults</span>
+</span><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="c1"># = Usage: ruby bash_to_zsh_history.rb</span>
+</span><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="c1"># = Author: Ankit Goyal</span>
+</span><span class='line'><span class="c1">#################################################################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># change if you don&#39;t use default values</span>
+</span><span class='line'><span class="no">BASH_HISTORY_FILE_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;HOME&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">/.bash_history&quot;</span>
+</span><span class='line'><span class="no">ZSH_HISTORY_FILE_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;HOME&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">/.zsh_history&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Read the bash history file</span>
+</span><span class='line'><span class="n">bash_hist_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="no">BASH_HISTORY_FILE_PATH</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Get the list of commands from bash history hile</span>
+</span><span class='line'><span class="n">command_list</span> <span class="o">=</span> <span class="n">bash_hist_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Open the zsh history file</span>
+</span><span class='line'><span class="n">zsh_hist_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="no">ZSH_HISTORY_FILE_PATH</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Get timestamp required for zsh history file format and update the history file</span>
+</span><span class='line'><span class="n">time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_i</span>
+</span><span class='line'><span class="n">command_list</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">command</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">time</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="n">zsh_hist_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;: </span><span class="si">#{</span><span class="n">time</span><span class="si">}</span><span class="s2">:0;</span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Close the file</span>
+</span><span class='line'><span class="n">zsh_hist_file</span><span class="o">.</span><span class="n">close</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[writing an LLVM MachineFunctionPass]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/04/01/writing-an-llvm-machinefunctionpass/"/>
+    <updated>2014-04-01T00:18:00-07:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/04/01/writing-an-llvm-machinefunctionpass</id>
+    <content type="html"><![CDATA[<p>Recently I have been working a lot with LLVM. I wanted to write a
+<a href="http://llvm.org/docs/WritingAnLLVMPass.html#the-machinefunctionpass-class">MachineFunctionPass</a>, but I couldn&rsquo;t find a good documentation to do that. LLVM has a pretty good <a href="http://llvm.org/docs/WritingAnLLVMPass.html">tutorial</a> on how to write a
+general purpose pass. However MachineFunctionPass is a <strong>code
+generator</strong>
+pass which are not registered and initialized like a normal pass.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[compile and run cpp program from vim]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim/"/>
-    <updated>2014-03-27T22:07:00-05:00</updated>
+    <updated>2014-03-27T22:07:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim</id>
     <content type="html"><![CDATA[<p>To compile and run cpp program from <code>MVIM</code>(or VIM) directly. Add this to
 your ~/.vimrc</p>
@@ -30,7 +117,7 @@ your ~/.vimrc</p>
 
 <p>Note: You can <strong>remove/add</strong> the <code>&lt;Enter&gt;</code> if you prefer to press <code>&lt;Enter&gt;</code> yourself.</p>
 
-<p>Now simply hit <code>Ctrl + c</code> to compile and <code>Ctrl + x</code> to execute.</p>
+<p>Now simply hit<code>Ctrl + c</code> to compile and <code>Ctrl + x</code> to execute.</p>
 
 <p>For a source file with name <code>main.cpp</code>, commands will be expanded to</p>
 
@@ -51,7 +138,7 @@ gets the current filename.</p>
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 3]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3/"/>
-    <updated>2014-03-25T19:19:00-05:00</updated>
+    <updated>2014-03-25T19:19:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3</id>
     <content type="html"><![CDATA[<p>In the previous posts <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">this</a> and <a href="http://goyalankit.com/blog/2014/03/24/learning-concept-checking-the-hard-way-2/">this</a>, I talked about the basics of
 concept checking and stuff you need to know.</p>
@@ -233,7 +320,7 @@ coding.</p>
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 2]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2/"/>
-    <updated>2014-03-24T18:38:00-05:00</updated>
+    <updated>2014-03-24T18:38:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2</id>
     <content type="html"><![CDATA[<p>In the <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">previous post</a>, I talked about importance/use case of concept
 checking. In this post we&rsquo;ll step by step see how concept checking
@@ -508,7 +595,7 @@ chooses the non-variadic one.</li>
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 1]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1/"/>
-    <updated>2014-03-21T15:27:00-05:00</updated>
+    <updated>2014-03-21T15:27:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1</id>
     <content type="html"><![CDATA[<p>What is a concept in C++?</p>
 
@@ -657,7 +744,7 @@ checking. It involves some really cool template tricks and C++ trivia.</p>
   <entry>
     <title type="html"><![CDATA[star in ruby]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby/"/>
-    <updated>2014-03-15T00:11:00-05:00</updated>
+    <updated>2014-03-15T00:11:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby</id>
     <content type="html"><![CDATA[<p>I have seen the Ruby&rsquo;s <code>*</code> operator used at several places in different
 ways and often times I get confused the way it is used. Finally I decided to learn more about it and here are few interesting roles of <code>*</code> operator that I found in Ruby.
@@ -924,7 +1011,7 @@ know some other way that splash could be used feel free to suggest it in comment
   <entry>
     <title type="html"><![CDATA[elasticsearch basics - Analyzers]]></title>
     <link href="http://goyalankit.github.io/blog/2013/07/24/elasticsearch-basics/"/>
-    <updated>2013-07-24T14:18:00-05:00</updated>
+    <updated>2013-07-24T14:18:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2013/07/24/elasticsearch-basics</id>
     <content type="html"><![CDATA[<p>Elasticsearch is a powerful open source search engine build over Apache
 Lucene. You can do all kind of customized searches on huge amount of
@@ -1462,7 +1549,7 @@ $(document).ready(function(){
   <entry>
     <title type="html"><![CDATA[modularize_sinatra - modular sinatra app generator]]></title>
     <link href="http://goyalankit.github.io/blog/2013/07/23/modularize-sinatra/"/>
-    <updated>2013-07-23T21:41:00-05:00</updated>
+    <updated>2013-07-23T21:41:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2013/07/23/modularize-sinatra</id>
     <content type="html"><![CDATA[<p><a href="http://github.com/sinatra/sinatra"><strong>Sinatra</strong></a> is simple, small and fast.</p>
 
@@ -1537,7 +1624,7 @@ $(document).ready(function(){
   <entry>
     <title type="html"><![CDATA[Initial commit]]></title>
     <link href="http://goyalankit.github.io/blog/2013/07/23/initial-commit/"/>
-    <updated>2013-07-23T15:23:00-05:00</updated>
+    <updated>2013-07-23T15:23:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2013/07/23/initial-commit</id>
     <content type="html"><![CDATA[<p><img src="http://25.media.tumblr.com/9bf68d40dd695984b5331280dfe2cb99/tumblr_mft9ey6vlg1rzwhuvo1_400.png"></p>
 

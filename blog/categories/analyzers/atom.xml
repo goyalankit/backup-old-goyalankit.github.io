@@ -4,7 +4,7 @@
   <title><![CDATA[Category: analyzers | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/analyzers/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-27T22:21:19-05:00</updated>
+  <updated>2014-05-24T19:50:07-07:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[elasticsearch basics - Analyzers]]></title>
     <link href="http://goyalankit.github.io/blog/2013/07/24/elasticsearch-basics/"/>
-    <updated>2013-07-24T14:18:00-05:00</updated>
+    <updated>2013-07-24T14:18:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2013/07/24/elasticsearch-basics</id>
     <content type="html"><![CDATA[<p>Elasticsearch is a powerful open source search engine build over Apache
 Lucene. You can do all kind of customized searches on huge amount of

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tip | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/tip/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-03-27T22:21:19-05:00</updated>
+  <updated>2014-05-24T19:50:07-07:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[compile and run cpp program from vim]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim/"/>
-    <updated>2014-03-27T22:07:00-05:00</updated>
+    <updated>2014-03-27T22:07:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim</id>
     <content type="html"><![CDATA[<p>To compile and run cpp program from <code>MVIM</code>(or VIM) directly. Add this to
 your ~/.vimrc</p>
@@ -27,7 +27,7 @@ nnoremap &lt;C-x&gt; :!./%:r.out
 </code>
 Note: You can <strong>remove/add</strong> the <code>&lt;Enter&gt;</code> if you prefer to press <code>&lt;Enter&gt;</code> yourself.</p>
 
-<p>Now simply hit <code>Ctrl + c</code> to compile and <code>Ctrl + x</code> to execute.</p>
+<p>Now simply hit<code>Ctrl + c</code> to compile and <code>Ctrl + x</code> to execute.</p>
 
 <p>For a source file with name <code>main.cpp</code>, commands will be expanded to
 ```sh

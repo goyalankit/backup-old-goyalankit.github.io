@@ -5,11 +5,12 @@
 	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
 	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<meta charset="utf-8">
-	<title>modularize_sinatra - modular sinatra app generator  | /home/ankit</title>
+	<title>writing an LLVM MachineFunctionPass  | /home/ankit</title>
 
 <meta name="author" content="Ankit Goyal"> 
 
-<meta name="description" content="Sinatra is simple, small and fast. Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort. &ndash; sinatra readme The &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="Recently I have been working a lot with LLVM. I wanted to write a
+MachineFunctionPass, but I couldn&rsquo;t find a good documentation to do that. &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -110,74 +111,12 @@ $(document).ready(
 </header>
 
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">modularize_sinatra - modular sinatra app generator</h2>
-	<div class="entry-content"><p><a href="http://github.com/sinatra/sinatra"><strong>Sinatra</strong></a> is simple, small and fast.</p>
-
-<blockquote><p>Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort. <strong> &ndash; sinatra readme</strong></p></blockquote>
-
-<p>The only downside is that it doesn&rsquo;t offer you the typical <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">&ldquo;MVC&rdquo;</a> like <a href="http://github.com/rails/rails"><strong>Rails</strong></a>.</p>
-
-<p>Lot of times Rails is an overkill for a simple application and Sinatra seems like a perfect choice. Since using Sinatra, you could write all your code in a single file, and at one time it becomes really hard to manage the code and you may feel the need of porting it to a framework like Rails. However, you don&rsquo;t need all the features that comes with Rails. What you need here is some kind of modularization in your application. For this very purpose I created a gem called <a href="http://github.com/goyalankit/modularize_sinatra">modularize_sinatra</a></p>
-
-<blockquote><p><strong>modularize_sinatra</strong> creates a <em>Rails like</em> MVC structure without the overhead.</p></blockquote>
-
-<p><a href="https://rubygems.org/gems/modularize_sinatra"><code>modularize_sinatra</code></a> is available on rubygems. For installation and usage instructions please visit <a href="http://github.com/goyalankit/modularize_sinatra">http://github.com/goyalankit/modularize_sinatra</a></p>
-
-<!-- more -->
-
-
-<h3>What does it do?</h3>
-
-<p>It generates the following directory structure, when generated using <code>modularize_sinatra myapp -C user</code></p>
-
-<pre><code>  .
-  |-- Gemfile
-  |-- Rakefile
-  |-- config
-  |   `-- environment.rb
-  |-- config.ru
-  |-- lib
-  |   |-- app.rb
-  |   |-- controllers
-  |   |   `-- user.rb
-  |   `-- views
-  |       `-- users
-  |           `-- index.erb
-  |-- myapp.rb
-  |-- public
-  |-- script
-  |-- spec
-  |   |-- controllers
-  |   |   `-- user_spec.rb
-  |   |-- spec_helper.rb
-  |   `-- support
-  `-- tmp
-</code></pre>
-
-<p>It generated some usual ruby files like</p>
-
-<ul>
-<li><strong>Gemfile</strong> &ndash;  A format for describing gem dependencies for Ruby programs.</li>
-<li><strong>Rakefile</strong> &ndash; Contains task to run specs.</li>
-<li><strong>config.ru</strong> &ndash; Rack configuration file.</li>
-<li><strong>config/environment.rb</strong> &ndash; Here you could load your configuration files. <em>Hint: Could load configuration given in .yml files</em></li>
-<li><strong>lib</strong> contains directories for placing your controllers and views.</li>
-<li><strong>myapp.rb</strong> loads all ruby files inside <code>lib</code>, <code>lib/controllers</code> and <code>lib/models</code>.</li>
-</ul>
-
-
-<p>Note the <strong>lib/models</strong> in above point. You could create a directory called <code>models</code> in lib directory to place your models and it will also be loaded.</p>
-
-<ul>
-<li><strong>public</strong> &ndash; To serve public assets.</li>
-<li><strong>script</strong> &ndash; You could get rid of this directory. This is just a container to put your scripts.</li>
-<li><strong>spec</strong> &ndash; Place your specifications inside this. modularize_sinatra integrates rspec for you by default.</li>
-</ul>
-
-
-<p>Please contribute at <a href="http://github.com/goyalankit/modularize_sinatra">http://github.com/goyalankit/modularize_sinatra</a></p>
-
-<p>Comments and suggestions are most welcome.</p>
+	<h2 class="title">writing an LLVM MachineFunctionPass</h2>
+	<div class="entry-content"><p>Recently I have been working a lot with LLVM. I wanted to write a
+<a href="http://llvm.org/docs/WritingAnLLVMPass.html#the-machinefunctionpass-class">MachineFunctionPass</a>, but I couldn&rsquo;t find a good documentation to do that. LLVM has a pretty good <a href="http://llvm.org/docs/WritingAnLLVMPass.html">tutorial</a> on how to write a
+general purpose pass. However MachineFunctionPass is a <strong>code
+generator</strong>
+pass which are not registered and initialized like a normal pass.</p>
 </div>
 
 
@@ -194,12 +133,8 @@ $(document).ready(
   
 
 
-<time datetime="2013-07-23T21:41:00-07:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time></div>
+<time datetime="2014-04-01T00:18:00-07:00" pubdate data-updated="true">Apr 1<span>st</span>, 2014</time></div>
 	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/gem/'>gem</a>, <a class='category' href='/blog/categories/labs/'>labs</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/sinatra/'>sinatra</a>
-
 
 </div>
 	
@@ -226,10 +161,10 @@ $(document).ready(
 <nav id="pagenavi">
   <p class="meta">
   
-  <a class="prev nohover" id="nohover" href="/blog/2013/07/23/initial-commit/" title="Previous Post: Initial commit">&laquo; Initial commit</a>
+  <a class="prev nohover" id="nohover" href="/blog/2014/03/27/compile-and-run-cpp-program-from-vim/" title="Previous Post: compile and run cpp program from vim">&laquo; compile and run cpp program from vim</a>
   
   
-  <a class="next nohover" href="/blog/2013/07/24/elasticsearch-basics/" title="Next Post: elasticsearch basics - Analyzers">elasticsearch basics - Analyzers &raquo;</a>
+  <a class="next nohover" href="/blog/2014/05/24/bash-to-zsh-history/" title="Next Post: import bash history to zsh history">import bash history to zsh history &raquo;</a>
   
   </p>
 </nav>
@@ -263,8 +198,8 @@ Powered by Octopress.
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://goyalankit.github.io/blog/2013/07/23/modularize-sinatra/';
-        var disqus_url = 'http://goyalankit.github.io/blog/2013/07/23/modularize-sinatra/';
+        var disqus_identifier = 'http://goyalankit.github.io/blog/2014/04/01/writing-an-llvm-machinefunctionpass/';
+        var disqus_url = 'http://goyalankit.github.io/blog/2014/04/01/writing-an-llvm-machinefunctionpass/';
         var disqus_script = 'embed.js';
       
     (function () {
