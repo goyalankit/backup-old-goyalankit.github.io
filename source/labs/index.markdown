@@ -2,7 +2,7 @@
 layout: page
 title: "labs"
 date: 2013-12-12 22:39
-comments: true
+comments: false
 sharing: true
 footer: true
 ---
@@ -13,7 +13,7 @@ footer: true
 <li><i class="fa-li fa fa-twitter"></i> <a href="https://github.com/goyalankit/bayou"><strong>Bayou</strong></a> : <i>  A weekly connected distributed storage system </i> </li>
 <li><i class="fa-li fa fa-comment-o"></i> <a href="https://github.com/goyalankit/chatty-meanbot/"><strong> Chatty Meanbot </strong></a> : <i> A jabber client bot. </i> </li>
 <li><i class="fa-li fa fa-android"></i> <a href="http://github.com/goyalankit/listenerbot"><strong>Listener Bot</strong></a> : <i> An android app to receive notifications using GCM </i> </li>
-<li><i class="fa-li fa fa-android"></i> <a href="http://github.com/goyalankit/compilers-and-llvm"><strong>LLVM Passes</strong></a> : <i> Implementation of Framework for data flow analysis and LLVM passes that include Local Optimizations (constant folding, strength reduction, algebraic identity), LICM (loop invariant code motion) and Dead code elimination </i> </li>
+<li><i class="fa-li fa fa-android"></i> <a href="http://github.com/goyalankit/compilers-and-llvm"><strong>DFA framework and LLVM passes</strong></a> : <i> Implementation of Framework for data flow analysis and LLVM passes that include Local Optimizations (constant folding, strength reduction, algebraic identity), LICM (loop invariant code motion) and Dead code elimination </i> </li>
 <li><i class="fa-li fa fa-book"></i> <a href="http://github.com/goyalankit/lyricit"><strong>Lyricit</strong></a> : <i> Gem to update itunes lyrics from command line. </i> </li>
 <li><i class="fa-li fa fa-book"></i> <a href="http://github.com/goyalankit/mbdb"><strong>Mbdb</strong></a> : <i> Implementation of MDB (miniature database) that uses Berkley DB as backend to support subset of SQL </i> </li>
 <li><i class="fa-li fa fa-book"></i> <a href="http://modularize-sinatra.goyalankit.com/"><strong>Modularize Sinatra</strong></a> : <i> Modularized Code Generator for Sinatra. </i> </li>
