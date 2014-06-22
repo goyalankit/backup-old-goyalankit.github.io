@@ -48,7 +48,7 @@ Mytype: constructor called.
 ```
 
 **Takeaway**: we can use **decltype** to get type of a variable.
-
+<!-- more -->
 ### 2. declval
 (since c++11)
 

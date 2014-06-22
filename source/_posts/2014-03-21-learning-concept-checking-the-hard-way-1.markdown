@@ -21,7 +21,7 @@ no explicit mechanism for representing concepts.
 
 Consider the following possible way 
 you may write your generic Binary Search Tree.
-
+<!-- more -->
 ```c++
 #include<iostream>
 

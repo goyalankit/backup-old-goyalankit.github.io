@@ -49,6 +49,7 @@ int main(int argc, const char * argv[])
 
 Let's dissect the above method and see what's happening.
 
+<!-- more -->
 
 `has_helper` method has two possible overload options. For the `int`
 datatype both are possible overload candidates but as we saw earlier
