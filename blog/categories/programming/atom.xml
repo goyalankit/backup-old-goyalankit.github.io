@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-05-24T19:53:20-07:00</updated>
+  <updated>2014-06-22T02:19:51-07:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -72,6 +72,9 @@ return 0;
 ```</p>
 
 <p>Let&rsquo;s dissect the above method and see what&rsquo;s happening.</p>
+
+<!-- more -->
+
 
 <p><code>has_helper</code> method has two possible overload options. For the <code>int</code>
 datatype both are possible overload candidates but as we saw earlier
@@ -206,6 +209,9 @@ Mytype: constructor called.</p></blockquote></blockquote>
 <p>```</p>
 
 <p><strong>Takeaway</strong>: we can use <strong>decltype</strong> to get type of a variable.</p>
+
+<!-- more -->
+
 
 <h3>2. declval</h3>
 
@@ -413,6 +419,9 @@ no explicit mechanism for representing concepts.</p>
 
 <p>Consider the following possible way
 you may write your generic Binary Search Tree.</p>
+
+<!-- more -->
+
 
 <p>```c++</p>
 
