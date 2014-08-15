@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cpp | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/cpp/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-06-22T11:52:01-07:00</updated>
+  <updated>2014-08-15T02:44:01-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 3]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3/"/>
-    <updated>2014-03-25T19:19:00-07:00</updated>
+    <updated>2014-03-25T19:19:00-05:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3</id>
     <content type="html"><![CDATA[<p>In the previous posts <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">this</a> and <a href="http://goyalankit.com/blog/2014/03/24/learning-concept-checking-the-hard-way-2/">this</a>, I talked about the basics of
 concept checking and stuff you need to know.</p>
@@ -158,7 +158,7 @@ coding.</p>
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 2]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2/"/>
-    <updated>2014-03-24T18:38:00-07:00</updated>
+    <updated>2014-03-24T18:38:00-05:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2</id>
     <content type="html"><![CDATA[<p>In the <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">previous post</a>, I talked about importance/use case of concept
 checking. In this post we&rsquo;ll step by step see how concept checking
@@ -403,7 +403,7 @@ non-variadic method.
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 1]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1/"/>
-    <updated>2014-03-21T15:27:00-07:00</updated>
+    <updated>2014-03-21T15:27:00-05:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1</id>
     <content type="html"><![CDATA[<p>What is a concept in C++?</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tip | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/tip/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-06-22T11:52:01-07:00</updated>
+  <updated>2014-08-15T02:44:01-05:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[compile and run cpp program from vim]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim/"/>
-    <updated>2014-03-27T22:07:00-07:00</updated>
+    <updated>2014-03-27T22:07:00-05:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim</id>
     <content type="html"><![CDATA[<p>To compile and run cpp program from <code>MVIM</code>(or VIM) directly. Add this to
 your ~/.vimrc</p>
