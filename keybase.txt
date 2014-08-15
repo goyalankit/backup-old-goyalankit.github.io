@@ -1,0 +1,77 @@
+==================================================================
+https://keybase.io/goyalankit
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://goyalankit.com
+  * I am goyalankit (https://keybase.io/goyalankit) on keybase.
+  * I have a public key with fingerprint BECF 8CAF 4DD5 71C4 764B  8971 7F70 AF04 3123 0FD0
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "client": {
+            "name": "keybase.io node.js client",
+            "version": "0.4.15"
+        },
+        "key": {
+            "fingerprint": "becf8caf4dd571c4764b89717f70af0431230fd0",
+            "host": "keybase.io",
+            "key_id": "7F70AF0431230FD0",
+            "uid": "5f19ef2737a83a12ff8dc45e1e648a00",
+            "username": "goyalankit"
+        },
+        "merkle_root": {
+            "ctime": 1408087928,
+            "hash": "f7af31c2e4b32bfbb86a9d8013b68c6ceeba0a60272915474f60c6d8f8e68baf902856b17b7119f19b5ec6221f5ae0d9984d5579fa12ca5ad1508141fa0c5bd5",
+            "seqno": 38559
+        },
+        "service": {
+            "hostname": "goyalankit.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1408088035,
+    "expire_in": 157680000,
+    "prev": "3bb158be085bb30f3829210bddfc569e84f4d026af97bb5aad95db4a56a66d34",
+    "seqno": 8,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+Comment: GPGTools - https://gpgtools.org
+
+owFlkllsFVUYx29ZWmypouGBkGLKkGDA5uacmbPNVTQsrfRBaGxKNGBuzto77e3M
+Ze60tTQXTWTrAwGihGJMECKuD2oIEuryYjUq1kRCRIzQgEsksSHWIPBA45mmRgnn
+6Sy/73++//d9++tnZ2qrLk688ujG3slbVWeuikz7xKmrg46I1ICTG3RkMdBhku5C
+3qOdnNOtBwQv62wQNYaR0tmucuMM0+T06bgcRKGlQBZlIXYqTSmfRpsg7NRxKQ5S
+MUdoaZjkBimFKZSIEiSYTyE1FHADkAddDxgFrGYhKid3fOtMa+YDZW9pCwWrW2b4
+lnUp3zv9gA30tXGpRznzOHSNYUoirKEmiHEwDZZ1POOpMxrgRR52B0macY+Ou4s6
+H0fRtG+ZBCkEEWCAUd9lNideLtgwQ7nxoHQ1Ep4rjBCMcF8xAD1BmCRSa8EBJ8Cl
+rg8xosgQIIlihmnCBDc+cBkmAlJBIfRtxgJrSVwXGsw1UL7PkMKY+sYakBxzBTFg
+EEHDgcRCYWuirLeGkZPzGMZ+JT3GfYHUadpp3e6yl5VRj40qxVESyaho3wpJUsql
+rpOBUsp+0K9FfkYmL4JQ2b79v7PQondUhAEPNzn6uVIQ63yQEpgSBuxK/9F9VtMT
+AmImNGBYCNtXj7m+C4FQykhMfM2QHQTgElsRKgTmXPlYCcQx4YQoD/3n09Y+4Z1W
+shx0hjzpjbVTGapqmJOpqs1Uz52Vjm6m9p4F/85zx+KaqeWo+/R9l69/NzT2zjMb
+3v++8e+Lf71ZTBauqDv+w77zbflzwwd3/fzxJ3VH0JTz9OEPk7HXKv2jv1wvrJ3d
+j7Y2//j1yx3YOV8/8upnJ349s2T494MXCttfOnJhbP6mtx9ev2n8/ho52lDzx/jC
+3JXJhttINm9J9C21clt7//xDq9q+gceeonsr8zbf3LN7p9/S81VN9FHHg4smVz62
+fv+LYs5YYXzkxtLf2v58941rTyzbzoLPV0wN5VoLD816XNSNNLVec6tPdu08vrn5
+wKqJT08ueM/cqK7MQ+rYvQ8cPvvtidYvujY8P/r6xuFLbDHJn5rcsvSRNT8N1y8h
+N2/vG9zx7NEnl59+64XdX7b/Aw==
+=OGJz
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/goyalankit
+
+==================================================================
