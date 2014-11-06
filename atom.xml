@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-08-15T02:50:12-05:00</updated>
+  <updated>2014-11-05T23:01:51-06:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Find current user's home directory in ruby]]></title>
+    <link href="http://goyalankit.github.io/blog/2014/11/05/home-directory-in-ruby/"/>
+    <updated>2014-11-05T22:46:00-06:00</updated>
+    <id>http://goyalankit.github.io/blog/2014/11/05/home-directory-in-ruby</id>
+    <content type="html"><![CDATA[<p>Finding user&rsquo;s home directory can be useful especially for config files. Ruby 1.9.2 introduced <code>Dir.home</code> method. So to find a config file present in home directory all you have to do is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">home</span><span class="p">,</span> <span class="s2">&quot;.myprojectconfig&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">config_file</span> <span class="c1"># &quot;/Users/ankit/.myprojectconfig&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However the <code>Dir.home</code> depends on <code>$HOME</code> env variable. If it&rsquo;s not set then it throws an error.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ENV</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;HOME&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">config_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">home</span><span class="p">,</span> <span class="s2">&quot;.myprojectconfig&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">config_file</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># user_home_dir.rb:2:in `home&#39;: couldn&#39;t find HOME environment -- expanding `~&#39; (ArgumentError)</span>
+</span><span class='line'><span class="c1"># from user_home_dir.rb:2:in `&lt;main&gt;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above error can be fixed if we know the current username. i.e.,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ENV</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;HOME&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">config_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">home</span><span class="p">(</span><span class="s2">&quot;ankit&quot;</span><span class="p">),</span> <span class="s2">&quot;.myprojectconfig&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">config_file</span> <span class="c1"># &quot;/Users/ankit/.myprojectconfig&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So how do we find the username? Operating system can tell us and ruby has an <code>etc</code> standard library.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;etc&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">config_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">home</span><span class="p">(</span><span class="no">Etc</span><span class="o">.</span><span class="n">getlogin</span><span class="p">),</span> <span class="s2">&quot;.myprojectconfig&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">config_file</span> <span class="c1"># &quot;/Users/ankit/.myprojectconfig&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above technique works on Linux and OSX. But it doesn&rsquo;t work on windows.</p>
+
+<h3>References:</h3>
+
+<p>RubyTapas: <a href="http://www.rubytapas.com/episodes/10-Finding-HOME">http://www.rubytapas.com/episodes/10-Finding-HOME</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[import bash history to zsh history]]></title>
