@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby, | /home/ankit]]></title>
   <link href="http://goyalankit.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-11-23T17:13:09-06:00</updated>
+  <updated>2015-12-03T14:26:39-08:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[star in ruby]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby/"/>
-    <updated>2014-03-15T00:11:00-05:00</updated>
+    <updated>2014-03-15T00:11:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby</id>
     <content type="html"><![CDATA[<p>I have seen the Ruby&rsquo;s <code>*</code> operator used at several places in different
 ways and often times I get confused the way it is used. Finally I decided to learn more about it and here are few interesting roles of <code>*</code> operator that I found in Ruby.

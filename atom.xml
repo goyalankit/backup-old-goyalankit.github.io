@@ -4,7 +4,7 @@
   <title><![CDATA[/home/ankit]]></title>
   <link href="http://goyalankit.github.io/atom.xml" rel="self"/>
   <link href="http://goyalankit.github.io/"/>
-  <updated>2014-11-23T17:13:09-06:00</updated>
+  <updated>2015-12-03T14:26:39-08:00</updated>
   <id>http://goyalankit.github.io/</id>
   <author>
     <name><![CDATA[Ankit Goyal]]></name>
@@ -14,72 +14,9 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Find current user's home directory in ruby]]></title>
-    <link href="http://goyalankit.github.io/blog/2014/11/05/home-directory-in-ruby/"/>
-    <updated>2014-11-05T22:46:00-06:00</updated>
-    <id>http://goyalankit.github.io/blog/2014/11/05/home-directory-in-ruby</id>
-    <content type="html"><![CDATA[<p>Finding user&rsquo;s home directory can be useful especially for config files. Ruby 1.9.2 introduced <code>Dir.home</code> method. So to find a config file present in home directory all you have to do is:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">home</span><span class="p">,</span> <span class="s2">&quot;.myprojectconfig&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">config_file</span> <span class="c1"># &quot;/Users/ankit/.myprojectconfig&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>However the <code>Dir.home</code> depends on <code>$HOME</code> env variable. If it&rsquo;s not set then it throws an error.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ENV</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;HOME&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">config_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">home</span><span class="p">,</span> <span class="s2">&quot;.myprojectconfig&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">p</span> <span class="n">config_file</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># user_home_dir.rb:2:in `home&#39;: couldn&#39;t find HOME environment -- expanding `~&#39; (ArgumentError)</span>
-</span><span class='line'><span class="c1"># from user_home_dir.rb:2:in `&lt;main&gt;&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Above error can be fixed if we know the current username. i.e.,</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ENV</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;HOME&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">config_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">home</span><span class="p">(</span><span class="s2">&quot;ankit&quot;</span><span class="p">),</span> <span class="s2">&quot;.myprojectconfig&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">config_file</span> <span class="c1"># &quot;/Users/ankit/.myprojectconfig&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So how do we find the username? Operating system can tell us and ruby has an <code>etc</code> standard library.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;etc&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">config_file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">home</span><span class="p">(</span><span class="no">Etc</span><span class="o">.</span><span class="n">getlogin</span><span class="p">),</span> <span class="s2">&quot;.myprojectconfig&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">config_file</span> <span class="c1"># &quot;/Users/ankit/.myprojectconfig&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Above technique works on Linux and OSX. But it doesn&rsquo;t work on windows.</p>
-
-<h3>References:</h3>
-
-<p>RubyTapas: <a href="http://www.rubytapas.com/episodes/10-Finding-HOME">http://www.rubytapas.com/episodes/10-Finding-HOME</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[import bash history to zsh history]]></title>
     <link href="http://goyalankit.github.io/blog/2014/05/24/bash-to-zsh-history/"/>
-    <updated>2014-05-24T19:35:00-05:00</updated>
+    <updated>2014-05-24T19:35:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/05/24/bash-to-zsh-history</id>
     <content type="html"><![CDATA[<p>Import bash history to zsh history. <a href="https://gist.github.com/goyalankit/a1c88bfc69107f93cda1">Gist Link</a></p>
 
@@ -153,7 +90,7 @@
   <entry>
     <title type="html"><![CDATA[compile and run cpp program from vim]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim/"/>
-    <updated>2014-03-27T22:07:00-05:00</updated>
+    <updated>2014-03-27T22:07:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/27/compile-and-run-cpp-program-from-vim</id>
     <content type="html"><![CDATA[<p>To compile and run cpp program from <code>MVIM</code>(or VIM) directly. Add this to
 your ~/.vimrc</p>
@@ -188,7 +125,7 @@ gets the current filename.</p>
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 3]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3/"/>
-    <updated>2014-03-25T19:19:00-05:00</updated>
+    <updated>2014-03-25T19:19:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/25/learning-concept-checking-the-hard-way-3</id>
     <content type="html"><![CDATA[<p>In the previous posts <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">this</a> and <a href="http://goyalankit.com/blog/2014/03/24/learning-concept-checking-the-hard-way-2/">this</a>, I talked about the basics of
 concept checking and stuff you need to know.</p>
@@ -373,7 +310,7 @@ coding.</p>
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 2]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2/"/>
-    <updated>2014-03-24T18:38:00-05:00</updated>
+    <updated>2014-03-24T18:38:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/24/learning-concept-checking-the-hard-way-2</id>
     <content type="html"><![CDATA[<p>In the <a href="http://goyalankit.com/blog/2014/03/21/learning-concept-checking-the-hard-way-1/">previous post</a>, I talked about importance/use case of concept
 checking. In this post we&rsquo;ll step by step see how concept checking
@@ -651,7 +588,7 @@ chooses the non-variadic one.</li>
   <entry>
     <title type="html"><![CDATA[learning concept checking the hard way - part 1]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1/"/>
-    <updated>2014-03-21T15:27:00-05:00</updated>
+    <updated>2014-03-21T15:27:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/21/learning-concept-checking-the-hard-way-1</id>
     <content type="html"><![CDATA[<p>What is a concept in C++?</p>
 
@@ -803,7 +740,7 @@ checking. It involves some really cool template tricks and C++ trivia.</p>
   <entry>
     <title type="html"><![CDATA[star in ruby]]></title>
     <link href="http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby/"/>
-    <updated>2014-03-15T00:11:00-05:00</updated>
+    <updated>2014-03-15T00:11:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2014/03/15/the-star-in-ruby</id>
     <content type="html"><![CDATA[<p>I have seen the Ruby&rsquo;s <code>*</code> operator used at several places in different
 ways and often times I get confused the way it is used. Finally I decided to learn more about it and here are few interesting roles of <code>*</code> operator that I found in Ruby.
@@ -1070,7 +1007,7 @@ know some other way that splash could be used feel free to suggest it in comment
   <entry>
     <title type="html"><![CDATA[elasticsearch basics - Analyzers]]></title>
     <link href="http://goyalankit.github.io/blog/2013/07/24/elasticsearch-basics/"/>
-    <updated>2013-07-24T14:18:00-05:00</updated>
+    <updated>2013-07-24T14:18:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2013/07/24/elasticsearch-basics</id>
     <content type="html"><![CDATA[<p>Elasticsearch is a powerful open source search engine build over Apache
 Lucene. You can do all kind of customized searches on huge amount of
@@ -1608,7 +1545,7 @@ $(document).ready(function(){
   <entry>
     <title type="html"><![CDATA[modularize_sinatra - modular sinatra app generator]]></title>
     <link href="http://goyalankit.github.io/blog/2013/07/23/modularize-sinatra/"/>
-    <updated>2013-07-23T21:41:00-05:00</updated>
+    <updated>2013-07-23T21:41:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2013/07/23/modularize-sinatra</id>
     <content type="html"><![CDATA[<p><a href="http://github.com/sinatra/sinatra"><strong>Sinatra</strong></a> is simple, small and fast.</p>
 
@@ -1683,7 +1620,7 @@ $(document).ready(function(){
   <entry>
     <title type="html"><![CDATA[Initial commit]]></title>
     <link href="http://goyalankit.github.io/blog/2013/07/23/initial-commit/"/>
-    <updated>2013-07-23T15:23:00-05:00</updated>
+    <updated>2013-07-23T15:23:00-07:00</updated>
     <id>http://goyalankit.github.io/blog/2013/07/23/initial-commit</id>
     <content type="html"><![CDATA[<p><img src="http://25.media.tumblr.com/9bf68d40dd695984b5331280dfe2cb99/tumblr_mft9ey6vlg1rzwhuvo1_400.png"></p>
 
