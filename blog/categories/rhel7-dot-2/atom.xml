@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rhel7.2 | /home/ankit]]></title>
+  <link href="http://goyalankit.github.io/blog/categories/rhel7-dot-2/atom.xml" rel="self"/>
+  <link href="http://goyalankit.github.io/"/>
+  <updated>2016-06-25T22:10:13-07:00</updated>
+  <id>http://goyalankit.github.io/</id>
+  <author>
+    <name><![CDATA[Ankit Goyal]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[User Namespace in Red Hat Enterprise Linux 7.2]]></title>
+    <link href="http://goyalankit.github.io/blog/2016/06/25/user-namespace-in-red-hat-enterprise-linux-7-dot-2/"/>
+    <updated>2016-06-25T15:34:00-07:00</updated>
+    <id>http://goyalankit.github.io/blog/2016/06/25/user-namespace-in-red-hat-enterprise-linux-7-dot-2</id>
+    <content type="html"><![CDATA[<p>Red Hat announced the availability of
+<a href="https://lwn.net/Articles/532593/">user namespace</a> in RHEL 7.2
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.2_Release_Notes/index.html#technology-preview-kernel">release notes</a>,
+but they don&rsquo;t give details on how to use them. By default in RHEL 7.2, user
+namespaces are disabled.</p>
+
+<h3>Verify if user namespace is enabled</h3>
+
+<p>You can run a quick check by executing the
+<a href="https://lwn.net/Articles/539941/">demo_userns.c</a> program, that creates a child
+in new user namespace. The child simply prints its effective user, groupd IDs
+and capabilities. If it runs successfuly, then namespaces are already enabled
+for you. However, if it returns something like <code>clone: Invalid argument</code>, <strong>then user
+namespaces are disabled.</strong></p>
+
+<p>You might need to install following libraries to run the <em>demo_userns.c</em>:</p>
+
+<p><code>sh
+sudo yum install libcap-devel
+</code></p>
+
+<p>Compile it using lcap:
+<code>sh
+gcc -lcap demo_ns.c -o demo_ns
+</code></p>
+
+<h3>Enable user namespace</h3>
+
+<p>To enable user namespace, you need to change one of the kernel parameters. You
+can do it by running following command:</p>
+
+<p><code>sh
+sudo grubby --args="user_namespace.enable=1" --update-kernel=/boot/vmlinuz-3.10.0-327.el7.x86_64
+</code></p>
+
+<p>Note: you might need to change the version of <code>vmlinuz</code> executable.</p>
+
+<p><strong>Reboot the box.</strong></p>
+
+<p><em>Now you can verify by running <a href="https://lwn.net/Articles/539941/">demo_userns.c</a>
+again and it should print user id, group id and capabilities</em></p>
+
+<p><code>
+eUID = 65534;  eGID = 65534;  capabilities: = cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,35,36+ep
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
