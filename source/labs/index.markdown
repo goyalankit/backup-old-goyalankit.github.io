@@ -28,6 +28,8 @@ footer: true
 
 <p><i class="fa fa-pencil-square-o fa-5x"> </i> <b style="font-size: 20px;">Yet another blog </b></p>
 <ul class="fa-ul">
+<li><i class="fa-li fa fa-bullhorn"></i> <a
+href="http://goyalankit.com/notez/"><strong>Notez Blog</strong></a> : <i> Notes that I have created over time. </i> </li>
 <li><i class="fa-li fa fa-bullhorn"></i> <a href="http://blog.goyalankit.com/"><strong>Endeavor</strong></a> : <i> Undergraduate blog </i> </li>
 
 </ul>
